@@ -57,6 +57,59 @@ h1, h2, h3, h4, h5, h6 {
 
 /* My Code: */
 
-body {
-    background-color: paleturquoise;
+#layout {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr;
+    min-height: 100vh;
+}
+
+#sidebar {
+    grid-column: 1 / 2;
+    display: flex;
+    flex-direction: column;
+    background-color: #252523;
+    border-right: 3px solid #3f3f3b;
+    padding: 10px 20px;
+    color: #c2c0b6;
+    gap: 30px;
+    font-size: 1.2rem;
+}
+
+#main {
+    grid-column: 2 / 3;
+    background-color: #262624;
+}
+
+/* Sidebar */
+
+#sidebar-group-1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+#title {
+    font-size: 1.5rem;
+    color: #faf9f5;
+}
+
+.sidebar-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-button {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    background-color: inherit;
+    border: none;
+    width: fit-content;
+    gap: 5px;
+}
+
+.sidebar-svg {
+    width: 15px;
+    height: 15px;
 }

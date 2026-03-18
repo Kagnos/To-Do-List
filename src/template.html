@@ -7,9 +7,32 @@
     <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 
-<body>
+<body id="layout">
 
-<main>
+<aside id="sidebar">
+
+    <div id="sidebar-group-1">
+        <p id="title">To Do List</p>
+        <button class="sidebar-button" aria-label="Close sidebar"><svg class="sidebar-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#faf9f5" stroke="#faf9f5"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Close sidebar</title> <g id="Complete"> <g id="sidebar-left"> <g> <rect data-name="Square" fill="none" height="18" id="Square-2" rx="2" ry="2" stroke="#faf9f5" stroke-miterlimit="10" stroke-width="2" width="18" x="3" y="3"></rect> <line fill="none" stroke="#faf9f5" stroke-miterlimit="10" stroke-width="2" x1="9" x2="9" y1="21" y2="3"></line> </g> </g> </g> </g></svg></button>
+    </div>
+
+    <div id="sidebar-group-2" class="sidebar-group">
+        <button class="sidebar-button" aria-label="New task"><svg class="sidebar-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12H20M12 4V20" stroke="#faf9f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>New Task</button>
+        <button class="sidebar-button" aria-label="New project"><svg class="sidebar-svg" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>plus-circle</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"> <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-464.000000, -1087.000000)" fill="#faf9f5"> <path d="M480,1117 C472.268,1117 466,1110.73 466,1103 C466,1095.27 472.268,1089 480,1089 C487.732,1089 494,1095.27 494,1103 C494,1110.73 487.732,1117 480,1117 L480,1117 Z M480,1087 C471.163,1087 464,1094.16 464,1103 C464,1111.84 471.163,1119 480,1119 C488.837,1119 496,1111.84 496,1103 C496,1094.16 488.837,1087 480,1087 L480,1087 Z M486,1102 L481,1102 L481,1097 C481,1096.45 480.553,1096 480,1096 C479.447,1096 479,1096.45 479,1097 L479,1102 L474,1102 C473.447,1102 473,1102.45 473,1103 C473,1103.55 473.447,1104 474,1104 L479,1104 L479,1109 C479,1109.55 479.447,1110 480,1110 C480.553,1110 481,1109.55 481,1109 L481,1104 L486,1104 C486.553,1104 487,1103.55 487,1103 C487,1102.45 486.553,1102 486,1102 L486,1102 Z" id="plus-circle" sketch:type="MSShapeGroup"> </path> </g> </g> </g></svg>New Project</button>
+    </div>
+
+    <div id="sidebar-group-3" class="sidebar-group">
+        <button class="sidebar-button" aria-label="View tasks"><svg class="sidebar-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M8.707 6.707a1 1 0 0 0-1.414-1.414L4 8.586 2.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4ZM12 7a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H12ZM8.707 13.293a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414L4 16.586l3.293-3.293a1 1 0 0 1 1.414 0ZM12 15a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H12Z" fill="#faf9f5"></path></g></svg>Tasks</button>
+        <button class="sidebar-button" aria-label="View projects"><svg class="sidebar-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#faf9f5"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:none;stroke:#faf9f5;stroke-linecap:square;stroke-miterlimit:10;stroke-width:1.91px;}</style> </defs> <g id="archieve"> <rect class="cls-1" x="1.5" y="1.98" width="21" height="6.68"></rect> <rect class="cls-1" x="1.5" y="8.66" width="21" height="6.68"></rect> <rect class="cls-1" x="1.5" y="15.34" width="21" height="6.68"></rect> <line class="cls-1" x1="10.09" y1="3.89" x2="13.91" y2="3.89"></line> <line class="cls-1" x1="10.09" y1="10.57" x2="13.91" y2="10.57"></line> <line class="cls-1" x1="10.09" y1="17.25" x2="13.91" y2="17.25"></line> </g> </g></svg>Projects</button>
+    </div>
+
+    <div id="sidebar-recents" class="sidebar-group">
+        <p>Recent</p>
+    </div>
+
+</aside>
+
+<main id="main">
 
 </main>
 
