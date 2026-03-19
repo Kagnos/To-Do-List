@@ -69,7 +69,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     flex-direction: column;
     background-color: #252523;
-    border-right: 3px solid #3f3f3b;
+    border-right: 3px solid #41413d;
     padding: 10px 20px;
     color: #c2c0b6;
     gap: 30px;
@@ -88,7 +88,7 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
 }
 
-#title {
+#sidebar-title {
     font-size: 1.5rem;
     color: #faf9f5;
 }
@@ -112,4 +112,59 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar-svg {
     width: 15px;
     height: 15px;
+}
+
+/* Dialog */
+
+dialog {
+    margin: auto;
+    background-color: #262624;
+    font-size: 1.5rem;
+    color: #c2c0b6;
+    border: 3px solid #41413d;
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+input, textarea, select {
+    background-color: #30302e;
+    color: inherit;
+    border: 2px solid #494946;
+    border-radius: 5px;
+}
+
+.form-title-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-title {
+    font-size: 2rem;
+}
+
+.dialog-cancel-button {
+    background-color: inherit;
+    border: none;
+}
+
+.dialog-cancel-svg {
+    width: 30px;
+    height: 30px;
+}
+
+.dialog-submit-button {
+    background-color: #30302e;
+    color: inherit;
+    border: 2px solid #494946;
+    border-radius: 5px;
 }
