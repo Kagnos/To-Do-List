@@ -1,9 +1,6 @@
 import { createTask } from "./tasks.js"
 import { createProject } from "./projects.js"
-import { addTask } from "./state.js"
-import { addProject } from "./state.js"
-import { taskList } from "./state.js"
-import { projectList } from "./state.js"
+import { addTask, addProject, taskList, projectList, currentPage, updateCurrentPage } from "./state.js"
 
 const allButtons = document.querySelectorAll("button");
 
@@ -45,6 +42,16 @@ function renderProjects() {
     };
 };
 
+function renderCurrentPage() {
+    if (currentPage === "tasks") {
+        clearDOM();
+        renderTasks();
+    } else if (currentPage === "projects") {
+        clearDOM();
+        renderProjects();
+    } else return;
+};
+
 allButtons.forEach(button => {
     button.addEventListener("click", () => {
         switch(button.id) {
@@ -59,9 +66,11 @@ allButtons.forEach(button => {
                 projectDialogForm.reset();
                 return projectDialog.close();
             case "view-tasks-sidebar-button":
+                updateCurrentPage("tasks");
                 clearDOM();
                 return renderTasks();
             case "view-projects-sidebar-button":
+                updateCurrentPage("projects");
                 clearDOM();
                 return renderProjects();
         };
@@ -74,6 +83,7 @@ taskDialogForm.addEventListener("submit", () => {
     const task = createTask(data);
     addTask(task);
     taskDialogForm.reset();
+    renderCurrentPage();
 });
 
 projectDialogForm.addEventListener("submit", () => {
@@ -82,9 +92,9 @@ projectDialogForm.addEventListener("submit", () => {
     const project = createProject(data);
     addProject(project);
     projectDialogForm.reset();
+    renderCurrentPage();
 });
 
 // when form submitted check which page user is on and if on page that form updates then update page
-// figure out why setAttribute isnt working
 // make DOM prettier, get inspo from claude and library project, also maybe adjust main top-padding
 // completed? past tense idk kinda iffy.
