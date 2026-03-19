@@ -11,34 +11,89 @@ const projectDialogForm = document.querySelector("#project-dialog-form");
 
 const main = document.querySelector("#main");
 const p = document.createElement("p");
+const div = document.createElement("div");
 
 const clearDOM = () => main.innerHTML = "";
 
 function renderTasks() {
+    main.classList.remove("projects-view");
+    main.classList.add("tasks-view");
+    
     const mainTitle = p.cloneNode();
     mainTitle.id = "main-title";
+    mainTitle.classList.remove("projects-view-title");
+    mainTitle.classList.add("tasks-view-title");
     mainTitle.innerText = "Tasks"
     main.append(mainTitle);
 
     for(let i = 0; i < taskList.length; i++) {
-        const task = p.cloneNode();
+        const task = div.cloneNode();
+        task.classList.add("main-task")
         task.dataset.index = i;
-        task.innerText = `${taskList[i].title} ${taskList[i].description} Due by: ${taskList[i].dueDate} Priority: ${taskList[i].priority} Completed: ${taskList[i].completed} Project: ${taskList[i].project}`;
         main.append(task);
+
+        const taskCompleted = p.cloneNode();
+        taskCompleted.innerText = taskList[i].completed;
+        task.append(taskCompleted);
+
+        const taskTitle = p.cloneNode();
+        taskTitle.innerText = taskList[i].title;
+        task.append(taskTitle);
+
+        const taskDescription = p.cloneNode();
+        taskDescription.innerText = taskList[i].description;
+        task.append(taskDescription);
+
+        const taskDueDate = p.cloneNode();
+        taskDueDate.innerText = taskList[i].dueDate;
+        task.append(taskDueDate);
+
+        const taskPriority = p.cloneNode();
+        taskPriority.innerText = taskList[i].priority;
+        task.append(taskPriority);
+
+        const taskProject = p.cloneNode();
+        taskProject.innerText = taskList[i].project;
+        task.append(taskProject);
     };
 };
 
 function renderProjects() {
+    main.classList.remove("tasks-view");
+    main.classList.add("projects-view");
+
     const mainTitle = p.cloneNode();
     mainTitle.id = "main-title";
+    mainTitle.classList.remove("tasks-view-title");
+    mainTitle.classList.add("projects-view-title");
     mainTitle.innerText = "Projects"
     main.append(mainTitle);
 
     for(let i = 0; i < projectList.length; i++) {
-        const project = p.cloneNode();
+        const project = div.cloneNode();
+        project.classList.add("main-project")
         project.dataset.index = i;
-        project.innerText = `${projectList[i].title} ${projectList[i].description} Due by: ${projectList[i].dueDate} Priority: ${projectList[i].priority} Completed: ${projectList[i].completed}`;
         main.append(project);
+
+        const projectCompleted = p.cloneNode();
+        projectCompleted.innerText = projectList[i].completed;
+        project.append(projectCompleted);
+
+        const projectTitle = p.cloneNode();
+        projectTitle.innerText = projectList[i].title;
+        project.append(projectTitle);
+
+        const projectDescription = p.cloneNode();
+        projectDescription.innerText = projectList[i].description;
+        project.append(projectDescription);
+
+        const projectDueDate = p.cloneNode();
+        projectDueDate.innerText = projectList[i].dueDate;
+        project.append(projectDueDate);
+
+        const projectPriority = p.cloneNode();
+        projectPriority.innerText = projectList[i].priority;
+        project.append(projectPriority);
     };
 };
 
@@ -94,3 +149,4 @@ projectDialogForm.addEventListener("submit", () => {
 });
 
 // make DOM prettier, get inspo from claude and library project, also maybe adjust main top-padding
+// remove sidebar open/close styles
