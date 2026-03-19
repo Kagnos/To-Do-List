@@ -1,7 +1,7 @@
 import { createTask } from "./tasks.js"
 import { createProject } from "./projects.js"
-import { addTask } from "./to-do-list.js"
-import { addProject } from "./to-do-list.js"
+import { addTask } from "./state.js"
+import { addProject } from "./state.js"
 
 const allButtons = document.querySelectorAll("button");
 

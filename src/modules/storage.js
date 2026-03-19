@@ -1,3 +1,3 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("local-storage script running!");
+    console.log("storage script running!");
 });
