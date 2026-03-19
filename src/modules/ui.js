@@ -10,6 +10,25 @@ const taskDialogForm = document.querySelector("#task-dialog-form");
 const projectDialog = document.querySelector("#project-dialog");
 const projectDialogForm = document.querySelector("#project-dialog-form");
 
+const main = document.querySelector("#main");
+const p = document.createElement("p");
+
+const clearDOM = () => main.innerHTML = "";
+
+function renderTasks() {
+    const mainTitle = p;
+    mainTitle.id = "main-title";
+    mainTitle.innerText = "Tasks"
+    main.append(mainTitle);
+};
+
+function renderProjects() {
+    const mainTitle = p;
+    mainTitle.id = "main-title";
+    mainTitle.innerText = "Projects"
+    main.append(mainTitle);
+}
+
 allButtons.forEach(button => {
     button.addEventListener("click", () => {
         switch(button.id) {
@@ -23,6 +42,12 @@ allButtons.forEach(button => {
             case "project-dialog-cancel-button":
                 projectDialogForm.reset();
                 return projectDialog.close();
+            case "view-tasks-sidebar-button":
+                clearDOM();
+                return renderTasks();
+            case "view-projects-sidebar-button":
+                clearDOM();
+                return renderProjects();
         };
     });
 });
