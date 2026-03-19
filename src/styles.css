@@ -57,6 +57,21 @@ h1, h2, h3, h4, h5, h6 {
 
 /* My Code: */
 
+/* Custom Values */
+
+:root {
+    --main-background-color: #262624;
+    --sidebar-background-color: #252523;
+    --hover-background-color: #141414;
+    --border-color: #41413d;
+    --form-border-color: #494946;
+    --form-item-background-color: #30302e;
+    --text-color: #c2c0b6;
+    --text-color-light: #faf9f5;
+}
+
+/* Layout Containers */
+
 #layout {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -68,17 +83,28 @@ h1, h2, h3, h4, h5, h6 {
     grid-column: 1 / 2;
     display: flex;
     flex-direction: column;
-    background-color: #252523;
-    border-right: 3px solid #41413d;
+    background-color: var(--sidebar-background-color);
+    border-right: 3px solid var(--border-color);
     padding: 10px 20px;
-    color: #c2c0b6;
+    color: var(--text-color);
     gap: 30px;
     font-size: 1.2rem;
 }
 
 #main {
     grid-column: 2 / 3;
-    background-color: #262624;
+    background-color: var(--main-background-color);
+}
+
+/* Buttons */
+
+button {
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: var(--hover-background-color);
+    color: var(--text-color-light);
 }
 
 /* Sidebar */
@@ -90,7 +116,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #sidebar-title {
     font-size: 1.5rem;
-    color: #faf9f5;
+    color: var(--text-color-light);
 }
 
 .sidebar-group {
@@ -105,8 +131,8 @@ h1, h2, h3, h4, h5, h6 {
     color: inherit;
     background-color: inherit;
     border: none;
-    width: fit-content;
     gap: 5px;
+    border-radius: 5px;
 }
 
 .sidebar-svg {
@@ -114,14 +140,18 @@ h1, h2, h3, h4, h5, h6 {
     height: 15px;
 }
 
+#close-open-sidebar-button {
+    margin: 5px 0;
+}
+
 /* Dialog */
 
 dialog {
     margin: auto;
-    background-color: #262624;
+    background-color: var(--main-background-color);
     font-size: 1.5rem;
-    color: #c2c0b6;
-    border: 3px solid #41413d;
+    color: var(--text-color);
+    border: 3px solid var(--border-color);
     border-radius: 5px;
 }
 
@@ -132,9 +162,9 @@ form {
 }
 
 input, textarea, select {
-    background-color: #30302e;
+    background-color: var(--form-item-background-color);
     color: inherit;
-    border: 2px solid #494946;
+    border: 2px solid var(--form-border-color);
     border-radius: 5px;
 }
 
@@ -155,6 +185,8 @@ input, textarea, select {
 .dialog-cancel-button {
     background-color: inherit;
     border: none;
+    border-radius: 5px;
+    margin: 5px 0;
 }
 
 .dialog-cancel-svg {
@@ -163,8 +195,8 @@ input, textarea, select {
 }
 
 .dialog-submit-button {
-    background-color: #30302e;
+    background-color: var(--form-item-background-color);
     color: inherit;
-    border: 2px solid #494946;
+    border: 2px solid var(--form-border-color);
     border-radius: 5px;
 }
