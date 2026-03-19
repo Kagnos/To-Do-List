@@ -22,7 +22,7 @@ function renderTasks() {
 
     for(let i = 0; i < taskList.length; i++) {
         const task = p.cloneNode();
-        task.setAttribute("data-index", i);
+        task.dataset.index = i;
         task.innerText = `${taskList[i].title} ${taskList[i].description} Due by: ${taskList[i].dueDate} Priority: ${taskList[i].priority} Completed: ${taskList[i].completed} Project: ${taskList[i].project}`;
         main.append(task);
     };
@@ -36,7 +36,7 @@ function renderProjects() {
 
     for(let i = 0; i < projectList.length; i++) {
         const project = p.cloneNode();
-        project.setAttribute("data-index", i);
+        project.dataset.index = i;
         project.innerText = `${projectList[i].title} ${projectList[i].description} Due by: ${projectList[i].dueDate} Priority: ${projectList[i].priority} Completed: ${projectList[i].completed}`;
         main.append(project);
     };
@@ -95,6 +95,5 @@ projectDialogForm.addEventListener("submit", () => {
     renderCurrentPage();
 });
 
-// when form submitted check which page user is on and if on page that form updates then update page
 // make DOM prettier, get inspo from claude and library project, also maybe adjust main top-padding
 // completed? past tense idk kinda iffy.
