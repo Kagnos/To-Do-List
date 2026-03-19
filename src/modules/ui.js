@@ -79,7 +79,6 @@ allButtons.forEach(button => {
 
 taskDialogForm.addEventListener("submit", () => {
     const data = Object.fromEntries(new FormData(taskDialogForm));
-    console.log(data);
     const task = createTask(data);
     addTask(task);
     taskDialogForm.reset();
@@ -88,7 +87,6 @@ taskDialogForm.addEventListener("submit", () => {
 
 projectDialogForm.addEventListener("submit", () => {
     const data = Object.fromEntries(new FormData(projectDialogForm));
-    console.log(data);
     const project = createProject(data);
     addProject(project);
     projectDialogForm.reset();
@@ -96,4 +94,3 @@ projectDialogForm.addEventListener("submit", () => {
 });
 
 // make DOM prettier, get inspo from claude and library project, also maybe adjust main top-padding
-// completed? past tense idk kinda iffy.
