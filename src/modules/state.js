@@ -1,5 +1,5 @@
-const taskList = [];
-const projectList = [];
+export const taskList = [];
+export const projectList = [];
 
 export function addTask(task) {
     taskList.push(task);

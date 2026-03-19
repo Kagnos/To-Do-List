@@ -2,6 +2,8 @@ import { createTask } from "./tasks.js"
 import { createProject } from "./projects.js"
 import { addTask } from "./state.js"
 import { addProject } from "./state.js"
+import { taskList } from "./state.js"
+import { projectList } from "./state.js"
 
 const allButtons = document.querySelectorAll("button");
 
@@ -16,18 +18,32 @@ const p = document.createElement("p");
 const clearDOM = () => main.innerHTML = "";
 
 function renderTasks() {
-    const mainTitle = p;
+    const mainTitle = p.cloneNode();
     mainTitle.id = "main-title";
     mainTitle.innerText = "Tasks"
     main.append(mainTitle);
+
+    for(let i = 0; i < taskList.length; i++) {
+        const task = p.cloneNode();
+        task.setAttribute("data-index", i);
+        task.innerText = `${taskList[i].title} ${taskList[i].description} Due by: ${taskList[i].dueDate} Priority: ${taskList[i].priority} Completed: ${taskList[i].completed} Project: ${taskList[i].project}`;
+        main.append(task);
+    };
 };
 
 function renderProjects() {
-    const mainTitle = p;
+    const mainTitle = p.cloneNode();
     mainTitle.id = "main-title";
     mainTitle.innerText = "Projects"
     main.append(mainTitle);
-}
+
+    for(let i = 0; i < projectList.length; i++) {
+        const project = p.cloneNode();
+        project.setAttribute("data-index", i);
+        project.innerText = `${projectList[i].title} ${projectList[i].description} Due by: ${projectList[i].dueDate} Priority: ${projectList[i].priority} Completed: ${projectList[i].completed}`;
+        main.append(project);
+    };
+};
 
 allButtons.forEach(button => {
     button.addEventListener("click", () => {
@@ -67,3 +83,8 @@ projectDialogForm.addEventListener("submit", () => {
     addProject(project);
     projectDialogForm.reset();
 });
+
+// when form submitted check which page user is on and if on page that form updates then update page
+// figure out why setAttribute isnt working
+// make DOM prettier, get inspo from claude and library project, also maybe adjust main top-padding
+// completed? past tense idk kinda iffy.
