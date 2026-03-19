@@ -1,3 +1,10 @@
-export function createTask(title, description, dueDate, priority, completed) {
-    return { title, description, dueDate, priority, completed };
+export function createTask(data) {
+    return {
+        title: data.task_title,
+        description: data.task_description,
+        dueDate: data.task_due_date,
+        priority: data.task_priority,
+        completed: false,
+        project: data.task_project,
+    };
 };

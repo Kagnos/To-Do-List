@@ -1,3 +1,6 @@
+import { createTask } from "./tasks.js"
+import { addTask } from "./to-do-list.js"
+
 const allButtons = document.querySelectorAll("button");
 
 const taskDialog = document.querySelector("#task-dialog");
@@ -13,4 +16,12 @@ allButtons.forEach(button => {
                 return taskDialog.close();
         };
     });
+});
+
+taskDialogForm.addEventListener("submit", () => {
+    const data = Object.fromEntries(new FormData(taskDialogForm));
+    console.log(data);
+    const task = createTask(data);
+    addTask(task);
+    taskDialogForm.reset();
 });

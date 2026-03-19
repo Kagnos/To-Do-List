@@ -37,7 +37,7 @@
 </main>
 
     <dialog id="task-dialog">
-        <form id="task-dialog-form">
+        <form id="task-dialog-form" method="dialog">
 
             <div class="form-title-group">
                 <p class="form-title">New Task</p>
@@ -47,22 +47,22 @@
 
             <div class="form-group">
                 <label for="task-title">Title</label>
-                <input id="task-title" name="task-title" type="text" maxlength="40" required>
+                <input id="task-title" name="task_title" type="text" maxlength="40" required>
             </div>
 
             <div class="form-group">
                 <label for="task-description">Description</label>
-                <textarea name="task-description" id="task-description" maxlength="500"></textarea>
+                <textarea name="task_description" id="task-description" maxlength="500"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="task-due-date">Due Date</label>
-                <input id="task-due-date" name="task-due-date" type="date" required>
+                <input id="task-due-date" name="task_due_date" type="date" required>
             </div>
 
             <div class="form-group">
                 <label for="task-priority">Priority</label>
-                <select name="task-priority" id="task-priority" required>
+                <select name="task_priority" id="task-priority" required>
                     <option value="" selected disabled>Select</option>
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
@@ -72,12 +72,12 @@
 
             <div class="form-group">
                 <label for="task-project">Project</label>
-                <select name="task-project" id="task-project">
+                <select name="task_project" id="task-project">
                     <option value="none" selected>None</option>
                 </select>
             </div>
 
-            <button class="dialog-submit-button" type="submit">Add Task</button>
+            <button id="task-dialog-submit-button" class="dialog-submit-button" type="submit">Add Task</button>
 
         </form>
     </dialog>
