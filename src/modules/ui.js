@@ -25,7 +25,7 @@ function renderTasks() {
     
     const mainTitle = p.cloneNode();
     mainTitle.id = "main-title";
-    mainTitle.innerText = "Tasks"
+    mainTitle.innerText = "Tasks";
     main.append(mainTitle);
 
     for(let i = 0; i < taskList.length; i++) {
@@ -75,7 +75,7 @@ function renderProjects() {
 
     const mainTitle = p.cloneNode();
     mainTitle.id = "main-title";
-    mainTitle.innerText = "Projects"
+    mainTitle.innerText = "Projects";
     main.append(mainTitle);
 
     for(let i = 0; i < projectList.length; i++) {
@@ -112,17 +112,36 @@ function renderProjects() {
         const projectDueDate = p.cloneNode();
         projectDueDate.innerText = projectList[i].dueDate;
         projectGroup2.append(projectDueDate);
+
+        project.addEventListener("click", () => {
+            updateCurrentPage("project");
+            clearMainDOM();
+            renderProject(project.dataset.index);
+        });
     };
 };
 
+function renderProject(index) {
+    main.classList.remove("projects-view");
+
+    const mainTitle = p.cloneNode();
+    mainTitle.id = "main-title";
+    mainTitle.innerText = projectList[index].title;
+    main.append(mainTitle);
+};
+
 function renderCurrentPage() {
-    if (currentPage === "tasks") {
-        clearMainDOM();
-        renderTasks();
-    } else if (currentPage === "projects") {
-        clearMainDOM();
-        renderProjects();
-    } else return;
+    switch (currentPage) {
+        case "tasks":
+            clearMainDOM();
+            return renderTasks();
+        case "projects":
+            clearMainDOM();
+            return renderProjects();
+        case "project":
+            clearMainDOM();
+            return renderProject();
+    };
 };
 
 function renderTaskProjectOptions() {
@@ -187,4 +206,5 @@ newProjectDialogForm.addEventListener("submit", () => {
 
 // create project view
 // reevalutate what needs to be done
+// projects and tasks view description limits with ... maybe can click to expand?
 // local storage
