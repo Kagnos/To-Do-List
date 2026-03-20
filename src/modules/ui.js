@@ -144,7 +144,7 @@ function renderCurrentPage() {
     };
 };
 
-function renderTaskProjectOptions() {
+function renderNewTaskProjectOptions() {
     const option = document.createElement("option");
 
     const noneOption = option.cloneNode();
@@ -166,7 +166,7 @@ allButtons.forEach(button => {
         switch(button.id) {
             case "new-task-sidebar-button":
                 clearNewTaskDialogDOM();
-                renderTaskProjectOptions();
+                renderNewTaskProjectOptions();
                 return newTaskDialog.showModal();
             case "new-task-dialog-cancel-button":
                 newTaskDialogForm.reset();
@@ -203,6 +203,11 @@ newProjectDialogForm.addEventListener("submit", () => {
     newProjectDialogForm.reset();
     renderCurrentPage();
 });
+
+// figure out why creating a new task with a selected project gives it a project index instead of title
+// update project view to include all info
+// create detailed task view similar to project view
+// rename tasks and projects to allTasks and allProjects
 
 // create project view
 // reevalutate what needs to be done
