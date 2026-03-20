@@ -12,6 +12,7 @@ const projectDialogForm = document.querySelector("#project-dialog-form");
 const main = document.querySelector("#main");
 const p = document.createElement("p");
 const div = document.createElement("div");
+const button = document.createElement("button");
 
 const clearDOM = () => main.innerHTML = "";
 
@@ -21,8 +22,6 @@ function renderTasks() {
     
     const mainTitle = p.cloneNode();
     mainTitle.id = "main-title";
-    mainTitle.classList.remove("projects-view-title");
-    mainTitle.classList.add("tasks-view-title");
     mainTitle.innerText = "Tasks"
     main.append(mainTitle);
 
@@ -32,29 +31,38 @@ function renderTasks() {
         task.dataset.index = i;
         main.append(task);
 
-        const taskCompleted = p.cloneNode();
-        taskCompleted.innerText = taskList[i].completed;
-        task.append(taskCompleted);
+        const taskGroup1 = div.cloneNode();
+        taskGroup1.classList.add("main-item-group-1");
+        task.append(taskGroup1);
 
         const taskTitle = p.cloneNode();
         taskTitle.innerText = taskList[i].title;
-        task.append(taskTitle);
+        taskGroup1.append(taskTitle);
+
+        const taskCompleted = p.cloneNode();
+        taskCompleted.innerText = `Completed: ${taskList[i].completed}`;
+        taskGroup1.append(taskCompleted);
 
         const taskDescription = p.cloneNode();
+        taskDescription.classList.add("description");
         taskDescription.innerText = taskList[i].description;
         task.append(taskDescription);
 
-        const taskDueDate = p.cloneNode();
-        taskDueDate.innerText = taskList[i].dueDate;
-        task.append(taskDueDate);
-
-        const taskPriority = p.cloneNode();
-        taskPriority.innerText = taskList[i].priority;
-        task.append(taskPriority);
+        const taskGroup2 = div.cloneNode();
+        taskGroup2.classList.add("main-item-group-2");
+        task.append(taskGroup2);
 
         const taskProject = p.cloneNode();
-        taskProject.innerText = taskList[i].project;
-        task.append(taskProject);
+        taskProject.innerText = `Project: ${taskList[i].project}`;
+        taskGroup2.append(taskProject);
+
+        const taskPriority = p.cloneNode();
+        taskPriority.innerText = `Priority: ${taskList[i].priority}`;
+        taskGroup2.append(taskPriority);
+                
+        const taskDueDate = p.cloneNode();
+        taskDueDate.innerText = taskList[i].dueDate;
+        taskGroup2.append(taskDueDate);
     };
 };
 
@@ -64,36 +72,43 @@ function renderProjects() {
 
     const mainTitle = p.cloneNode();
     mainTitle.id = "main-title";
-    mainTitle.classList.remove("tasks-view-title");
-    mainTitle.classList.add("projects-view-title");
     mainTitle.innerText = "Projects"
     main.append(mainTitle);
 
     for(let i = 0; i < projectList.length; i++) {
-        const project = div.cloneNode();
+        const project = button.cloneNode();
         project.classList.add("main-project")
         project.dataset.index = i;
         main.append(project);
 
-        const projectCompleted = p.cloneNode();
-        projectCompleted.innerText = projectList[i].completed;
-        project.append(projectCompleted);
+        const projectGroup1 = div.cloneNode();
+        projectGroup1.classList.add("main-item-group-1");
+        project.append(projectGroup1);
 
         const projectTitle = p.cloneNode();
         projectTitle.innerText = projectList[i].title;
-        project.append(projectTitle);
+        projectGroup1.append(projectTitle);
+
+        const projectCompleted = p.cloneNode();
+        projectCompleted.innerText = `Completed: ${projectList[i].completed}`;
+        projectGroup1.append(projectCompleted);
 
         const projectDescription = p.cloneNode();
+        projectDescription.classList.add("description");
         projectDescription.innerText = projectList[i].description;
         project.append(projectDescription);
 
-        const projectDueDate = p.cloneNode();
-        projectDueDate.innerText = projectList[i].dueDate;
-        project.append(projectDueDate);
+        const projectGroup2 = div.cloneNode();
+        projectGroup2.classList.add("main-item-group-2");
+        project.append(projectGroup2);
 
         const projectPriority = p.cloneNode();
-        projectPriority.innerText = projectList[i].priority;
-        project.append(projectPriority);
+        projectPriority.innerText = `Priority: ${projectList[i].priority}`;
+        projectGroup2.append(projectPriority);
+
+        const projectDueDate = p.cloneNode();
+        projectDueDate.innerText = projectList[i].dueDate;
+        projectGroup2.append(projectDueDate);
     };
 };
 
@@ -148,5 +163,7 @@ projectDialogForm.addEventListener("submit", () => {
     renderCurrentPage();
 });
 
-// make DOM prettier, get inspo from claude and library project, also maybe adjust main top-padding
-// remove sidebar open/close styles
+// hook up new task project input to projectList array
+// create project view
+// reevalutate what needs to be done
+// local storage
