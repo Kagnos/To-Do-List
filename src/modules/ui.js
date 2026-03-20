@@ -122,10 +122,23 @@ function renderCurrentPage() {
     } else return;
 };
 
+function renderTaskProjectOptions() {
+    const taskProjectSelect = document.querySelector("#task-project");
+    const option = document.createElement("option");
+
+    for(let i = 0; i < projectList.length; i++) {
+        const projectOption = option.cloneNode();
+        projectOption.setAttribute("value", projectList[i]);
+        projectOption.innerText = projectList[i].title;
+        taskProjectSelect.append(projectOption);
+    };
+};
+
 allButtons.forEach(button => {
     button.addEventListener("click", () => {
         switch(button.id) {
             case "new-task-sidebar-button":
+                renderTaskProjectOptions();
                 return taskDialog.showModal();
             case "task-dialog-cancel-button":
                 taskDialogForm.reset();
@@ -163,7 +176,6 @@ projectDialogForm.addEventListener("submit", () => {
     renderCurrentPage();
 });
 
-// hook up new task project input to projectList array
 // create project view
 // reevalutate what needs to be done
 // local storage
