@@ -4,10 +4,10 @@ import { addTask, addProject, taskList, projectList, currentPage, updateCurrentP
 
 const allButtons = document.querySelectorAll("button");
 
-const taskDialog = document.querySelector("#task-dialog");
-const taskDialogForm = document.querySelector("#task-dialog-form");
-const projectDialog = document.querySelector("#project-dialog");
-const projectDialogForm = document.querySelector("#project-dialog-form");
+const newTaskDialog = document.querySelector("#new-task-dialog");
+const newTaskDialogForm = document.querySelector("#new-task-dialog-form");
+const newProjectDialog = document.querySelector("#new-project-dialog");
+const newProjectDialogForm = document.querySelector("#new-project-dialog-form");
 
 const main = document.querySelector("#main");
 const p = document.createElement("p");
@@ -148,15 +148,15 @@ allButtons.forEach(button => {
             case "new-task-sidebar-button":
                 clearNewTaskDialogDOM();
                 renderTaskProjectOptions();
-                return taskDialog.showModal();
-            case "task-dialog-cancel-button":
-                taskDialogForm.reset();
-                return taskDialog.close();
+                return newTaskDialog.showModal();
+            case "new-task-dialog-cancel-button":
+                newTaskDialogForm.reset();
+                return newTaskDialog.close();
             case "new-project-sidebar-button":
-                return projectDialog.showModal();
-            case "project-dialog-cancel-button":
-                projectDialogForm.reset();
-                return projectDialog.close();
+                return newProjectDialog.showModal();
+            case "new-project-dialog-cancel-button":
+                newProjectDialogForm.reset();
+                return newProjectDialog.close();
             case "view-tasks-sidebar-button":
                 updateCurrentPage("tasks");
                 clearMainDOM();
@@ -169,19 +169,19 @@ allButtons.forEach(button => {
     });
 });
 
-taskDialogForm.addEventListener("submit", () => {
-    const data = Object.fromEntries(new FormData(taskDialogForm));
+newTaskDialogForm.addEventListener("submit", () => {
+    const data = Object.fromEntries(new FormData(newTaskDialogForm));
     const task = createTask(data);
     addTask(task);
-    taskDialogForm.reset();
+    newTaskDialogForm.reset();
     renderCurrentPage();
 });
 
-projectDialogForm.addEventListener("submit", () => {
-    const data = Object.fromEntries(new FormData(projectDialogForm));
+newProjectDialogForm.addEventListener("submit", () => {
+    const data = Object.fromEntries(new FormData(newProjectDialogForm));
     const project = createProject(data);
     addProject(project);
-    projectDialogForm.reset();
+    newProjectDialogForm.reset();
     renderCurrentPage();
 });
 
