@@ -13,8 +13,11 @@ const main = document.querySelector("#main");
 const p = document.createElement("p");
 const div = document.createElement("div");
 const button = document.createElement("button");
+const taskProjectSelect = document.querySelector("#task-project");
 
-const clearDOM = () => main.innerHTML = "";
+const clearMainDOM = () => main.innerHTML = "";
+
+const clearNewTaskDialogDOM = () => taskProjectSelect.innerHTML = "";
 
 function renderTasks() {
     main.classList.remove("projects-view");
@@ -114,21 +117,26 @@ function renderProjects() {
 
 function renderCurrentPage() {
     if (currentPage === "tasks") {
-        clearDOM();
+        clearMainDOM();
         renderTasks();
     } else if (currentPage === "projects") {
-        clearDOM();
+        clearMainDOM();
         renderProjects();
     } else return;
 };
 
 function renderTaskProjectOptions() {
-    const taskProjectSelect = document.querySelector("#task-project");
     const option = document.createElement("option");
+
+    const noneOption = option.cloneNode();
+    noneOption.setAttribute("value", "none");
+    noneOption.setAttribute("selected", "");
+    noneOption.innerText = "None";
+    taskProjectSelect.append(noneOption);
 
     for(let i = 0; i < projectList.length; i++) {
         const projectOption = option.cloneNode();
-        projectOption.setAttribute("value", projectList[i]);
+        projectOption.setAttribute("value", i);
         projectOption.innerText = projectList[i].title;
         taskProjectSelect.append(projectOption);
     };
@@ -138,6 +146,7 @@ allButtons.forEach(button => {
     button.addEventListener("click", () => {
         switch(button.id) {
             case "new-task-sidebar-button":
+                clearNewTaskDialogDOM();
                 renderTaskProjectOptions();
                 return taskDialog.showModal();
             case "task-dialog-cancel-button":
@@ -150,11 +159,11 @@ allButtons.forEach(button => {
                 return projectDialog.close();
             case "view-tasks-sidebar-button":
                 updateCurrentPage("tasks");
-                clearDOM();
+                clearMainDOM();
                 return renderTasks();
             case "view-projects-sidebar-button":
                 updateCurrentPage("projects");
-                clearDOM();
+                clearMainDOM();
                 return renderProjects();
         };
     });
