@@ -138,9 +138,6 @@ function renderCurrentPage() {
         case "projects":
             clearMainDOM();
             return renderProjects();
-        case "project":
-            clearMainDOM();
-            return renderProject();
     };
 };
 
@@ -204,6 +201,8 @@ newProjectDialogForm.addEventListener("submit", () => {
     renderCurrentPage();
 });
 
+
+// figure out why projects view breaks container
 // figure out why creating a new task with a selected project gives it a project index instead of title
 // update project view to include all info
 // create detailed task view similar to project view
