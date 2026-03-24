@@ -145,14 +145,14 @@ function renderNewTaskProjectOptions() {
     const option = document.createElement("option");
 
     const noneOption = option.cloneNode();
-    noneOption.setAttribute("value", "none");
+    noneOption.setAttribute("value", "None");
     noneOption.setAttribute("selected", "");
     noneOption.innerText = "None";
     taskProjectSelect.append(noneOption);
 
     for(let i = 0; i < projectList.length; i++) {
         const projectOption = option.cloneNode();
-        projectOption.setAttribute("value", i);
+        projectOption.setAttribute("value", projectList[i].title);
         projectOption.innerText = projectList[i].title;
         taskProjectSelect.append(projectOption);
     };
@@ -202,8 +202,6 @@ newProjectDialogForm.addEventListener("submit", () => {
 });
 
 
-// figure out why projects view breaks container
-// figure out why creating a new task with a selected project gives it a project index instead of title
 // update project view to include all info
 // create detailed task view similar to project view
 // rename tasks and projects to allTasks and allProjects
