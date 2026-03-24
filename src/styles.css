@@ -142,12 +142,12 @@ button:hover {
 
 /* Main */
 
-.tasks-view {
+.list-view {
     display: flex;
     flex-direction: column;
 }
 
-.projects-view {
+.grid-view {
     display: grid;
     grid-template-columns: repeat(auto-fit, 420px);
     grid-template-rows: calc(3rem + 24px) repeat(auto-fit, 250px);

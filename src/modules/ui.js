@@ -20,8 +20,8 @@ const clearMainDOM = () => main.innerHTML = "";
 const clearNewTaskDialogDOM = () => taskProjectSelect.innerHTML = "";
 
 function renderTasks() {
-    main.classList.remove("projects-view");
-    main.classList.add("tasks-view");
+    main.classList.remove("grid-view");
+    main.classList.add("list-view");
     
     const mainTitle = p.cloneNode();
     mainTitle.id = "main-title";
@@ -70,8 +70,8 @@ function renderTasks() {
 };
 
 function renderProjects() {
-    main.classList.remove("tasks-view");
-    main.classList.add("projects-view");
+    main.classList.remove("list-view");
+    main.classList.add("grid-view");
 
     const mainTitle = p.cloneNode();
     mainTitle.id = "main-title";
@@ -122,8 +122,8 @@ function renderProjects() {
 };
 
 function renderProject(index) {
-    main.classList.remove("projects-view");
-    main.classList.add("tasks-view");
+    main.classList.remove("grid-view");
+    main.classList.add("list-view");
 
     const mainTitle = p.cloneNode();
     mainTitle.id = "main-title";
