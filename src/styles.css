@@ -93,6 +93,7 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-color);
     padding: 40px;
     gap: 40px;
+    font-size: 1.5rem;
 }
 
 /* Buttons */
@@ -161,7 +162,6 @@ button:hover {
 .main-task {
     display: grid;
     width: 100%;
-    font-size: 1.5rem;
     gap: 5px;
     border: 2px solid var(--border-color);
     border-radius: 5px;
@@ -173,7 +173,6 @@ button:hover {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 4fr 1fr;
     color: inherit;
-    font-size: 1.5rem;
     gap: 5px;
     background-color: var(--main-background-color);
     border: 2px solid var(--border-color);
@@ -181,12 +180,7 @@ button:hover {
     padding: 0 10px;
 }
 
-.main-item-group-1 {
-    display: flex;
-    justify-content: space-between;
-}
-
-.main-item-group-2 {
+.main-item-group {
     display: flex;
     justify-content: space-between;
 }

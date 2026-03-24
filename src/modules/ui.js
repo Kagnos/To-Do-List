@@ -35,7 +35,7 @@ function renderTasks() {
         main.append(task);
 
         const taskGroup1 = div.cloneNode();
-        taskGroup1.classList.add("main-item-group-1");
+        taskGroup1.classList.add("main-item-group");
         task.append(taskGroup1);
 
         const taskTitle = p.cloneNode();
@@ -52,7 +52,7 @@ function renderTasks() {
         task.append(taskDescription);
 
         const taskGroup2 = div.cloneNode();
-        taskGroup2.classList.add("main-item-group-2");
+        taskGroup2.classList.add("main-item-group");
         task.append(taskGroup2);
 
         const taskProject = p.cloneNode();
@@ -85,7 +85,7 @@ function renderProjects() {
         main.append(project);
 
         const projectGroup1 = div.cloneNode();
-        projectGroup1.classList.add("main-item-group-1");
+        projectGroup1.classList.add("main-item-group");
         project.append(projectGroup1);
 
         const projectTitle = p.cloneNode();
@@ -102,7 +102,7 @@ function renderProjects() {
         project.append(projectDescription);
 
         const projectGroup2 = div.cloneNode();
-        projectGroup2.classList.add("main-item-group-2");
+        projectGroup2.classList.add("main-item-group");
         project.append(projectGroup2);
 
         const projectPriority = p.cloneNode();
@@ -114,7 +114,7 @@ function renderProjects() {
         projectGroup2.append(projectDueDate);
 
         project.addEventListener("click", () => {
-            updateCurrentPage("project");
+            updateCurrentPage(projectList[i].title);
             clearMainDOM();
             renderProject(project.dataset.index);
         });
@@ -123,11 +123,71 @@ function renderProjects() {
 
 function renderProject(index) {
     main.classList.remove("projects-view");
+    main.classList.add("tasks-view");
 
     const mainTitle = p.cloneNode();
     mainTitle.id = "main-title";
     mainTitle.innerText = projectList[index].title;
     main.append(mainTitle);
+
+    const projectGroup1 = div.cloneNode();
+    projectGroup1.classList.add("main-item-group");
+    main.append(projectGroup1);
+
+    const priority = p.cloneNode();
+    priority.innerText = `Priority: ${projectList[index].priority}`;
+    projectGroup1.append(priority);
+
+    const dueDate = p.cloneNode();
+    dueDate.innerText = projectList[index].dueDate;
+    projectGroup1.append(dueDate);
+    
+    const completed = p.cloneNode();
+    completed.innerText = `Completed: ${projectList[index].completed}`;
+    projectGroup1.append(completed);
+
+    const description = p.cloneNode();
+    description.classList.add("description");
+    description.innerText = projectList[index].description;
+    main.append(description);
+
+    for(let i = 0; i < taskList.length; i++) {
+        if (currentPage === taskList[i].project) {
+            const task = div.cloneNode();
+            task.classList.add("main-task")
+            task.dataset.index = i;
+            main.append(task);
+
+            const taskGroup1 = div.cloneNode();
+            taskGroup1.classList.add("main-item-group");
+            task.append(taskGroup1);
+
+            const taskTitle = p.cloneNode();
+            taskTitle.innerText = taskList[i].title;
+            taskGroup1.append(taskTitle);
+
+            const taskCompleted = p.cloneNode();
+            taskCompleted.innerText = `Completed: ${taskList[i].completed}`;
+            taskGroup1.append(taskCompleted);
+
+            const taskDescription = p.cloneNode();
+            taskDescription.classList.add("description");
+            taskDescription.innerText = taskList[i].description;
+            task.append(taskDescription);
+
+            const taskGroup2 = div.cloneNode();
+            taskGroup2.classList.add("main-item-group");
+            task.append(taskGroup2);
+
+            const taskPriority = p.cloneNode();
+            taskPriority.innerText = `Priority: ${taskList[i].priority}`;
+            taskGroup2.append(taskPriority);
+                    
+            const taskDueDate = p.cloneNode();
+            taskDueDate.innerText = taskList[i].dueDate;
+            taskGroup2.append(taskDueDate);
+        };
+    };
 };
 
 function renderCurrentPage() {
@@ -202,11 +262,11 @@ newProjectDialogForm.addEventListener("submit", () => {
 });
 
 
-// update project view to include all info
 // create detailed task view similar to project view
 // rename tasks and projects to allTasks and allProjects
 
 // create project view
 // reevalutate what needs to be done
+// checkbox, edit svg, delete svg
 // projects and tasks view description limits with ... maybe can click to expand?
 // local storage
