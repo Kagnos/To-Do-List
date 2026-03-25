@@ -150,7 +150,7 @@ button:hover {
 
 .grid-view {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 420px);
+    grid-template-columns: repeat(auto-fit, 450px);
     grid-template-rows: calc(3rem + 24px) repeat(auto-fit, 250px);
 }
 
