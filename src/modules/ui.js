@@ -165,7 +165,7 @@ function renderProject(index) {
     group1.append(priority);
 
     const dueDate = p.cloneNode();
-    dueDate.innerText = `Due: ${projectList[i].dueDate}`
+    dueDate.innerText = `Due: ${projectList[index].dueDate}`
     group1.append(dueDate);
     
     const buttonGroup = div.cloneNode();
@@ -352,10 +352,10 @@ newProjectDialogForm.addEventListener("submit", () => {
 });
 
 
-// rename tasks and projects to allTasks and allProjects
+// checkbox icon switch and gray out or strikethrough text
+// edit button modal
+// delete button are you sure? and delete
 
-// reevalutate what needs to be done
-// checkbox, edit svg, delete svg
 // projects and tasks view description limits with ... maybe can click to expand?
 // local storage
 // sorting by recent or completed?
