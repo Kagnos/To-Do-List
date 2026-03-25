@@ -42,9 +42,27 @@ function renderTasks() {
         taskTitle.innerText = taskList[i].title;
         taskGroup1.append(taskTitle);
 
-        const taskCompleted = p.cloneNode();
-        taskCompleted.innerText = `Completed: ${taskList[i].completed}`;
-        taskGroup1.append(taskCompleted);
+        const taskButtonGroup = div.cloneNode();
+        taskButtonGroup.classList.add("main-item-group");
+        taskGroup1.append(taskButtonGroup);
+
+        const checkboxButton = button.cloneNode();
+        checkboxButton.classList.add("main-button");
+        checkboxButton.setAttribute("aria-label", "Check task");
+        checkboxButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <g id='Interface / Checkbox_Unchecked'> <path id='Vector' d='M4 7.2002V16.8002C4 17.9203 4 18.4801 4.21799 18.9079C4.40973 19.2842 4.71547 19.5905 5.0918 19.7822C5.5192 20 6.07899 20 7.19691 20H16.8031C17.921 20 18.48 20 18.9074 19.7822C19.2837 19.5905 19.5905 19.2842 19.7822 18.9079C20 18.4805 20 17.9215 20 16.8036V7.19691C20 6.07899 20 5.5192 19.7822 5.0918C19.5905 4.71547 19.2837 4.40973 18.9074 4.21799C18.4796 4 17.9203 4 16.8002 4H7.2002C6.08009 4 5.51962 4 5.0918 4.21799C4.71547 4.40973 4.40973 4.71547 4.21799 5.0918C4 5.51962 4 6.08009 4 7.2002Z' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g> </g></svg>"
+        taskButtonGroup.append(checkboxButton);
+
+        const editButton = button.cloneNode();
+        editButton.classList.add("main-button");
+        editButton.setAttribute("aria-label", "Edit task");
+        editButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill='#c2c0b6' stroke='#c2c0b6'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title></title> <g id='Complete'> <g id='edit'> <g> <path d='M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8' fill='none' stroke='#c2c0b6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'></path> <polygon fill='none' points='12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8' stroke='#c2c0b6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'></polygon> </g> </g> </g> </g></svg>"
+        taskButtonGroup.append(editButton);
+
+        const deleteButton = button.cloneNode();
+        deleteButton.classList.add("main-button");
+        deleteButton.setAttribute("aria-label", "Delete task");
+        deleteButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path d='M4 7H20' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M6 10L7.70141 19.3578C7.87432 20.3088 8.70258 21 9.66915 21H14.3308C15.2974 21 16.1257 20.3087 16.2986 19.3578L18 10' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g></svg>";
+        taskButtonGroup.append(deleteButton);
 
         const taskDescription = p.cloneNode();
         taskDescription.classList.add("description");
@@ -66,6 +84,18 @@ function renderTasks() {
         const taskDueDate = p.cloneNode();
         taskDueDate.innerText = taskList[i].dueDate;
         taskGroup2.append(taskDueDate);
+
+        checkboxButton.addEventListener("click", () => {
+            console.log(`checkbox button from task "${taskList[i].title}" pressed`);
+        });
+
+        editButton.addEventListener("click", () => {
+            console.log(`edit button from task "${taskList[i].title}" pressed`);
+        });
+          
+        deleteButton.addEventListener("click", () => {
+            console.log(`delete button from task "${taskList[i].title}" pressed`);
+        });
     };
 };
 
@@ -91,10 +121,6 @@ function renderProjects() {
         const projectTitle = p.cloneNode();
         projectTitle.innerText = projectList[i].title;
         projectGroup1.append(projectTitle);
-
-        const projectCompleted = p.cloneNode();
-        projectCompleted.innerText = `Completed: ${projectList[i].completed}`;
-        projectGroup1.append(projectCompleted);
 
         const projectDescription = p.cloneNode();
         projectDescription.classList.add("description");
@@ -142,9 +168,27 @@ function renderProject(index) {
     dueDate.innerText = projectList[index].dueDate;
     projectGroup1.append(dueDate);
     
-    const completed = p.cloneNode();
-    completed.innerText = `Completed: ${projectList[index].completed}`;
-    projectGroup1.append(completed);
+    const buttonGroup = div.cloneNode();
+    buttonGroup.classList.add("main-item-group");
+    projectGroup1.append(buttonGroup);
+
+    const checkboxButton = button.cloneNode();
+    checkboxButton.classList.add("main-button");
+    checkboxButton.setAttribute("aria-label", "Check Project");
+    checkboxButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <g id='Interface / Checkbox_Unchecked'> <path id='Vector' d='M4 7.2002V16.8002C4 17.9203 4 18.4801 4.21799 18.9079C4.40973 19.2842 4.71547 19.5905 5.0918 19.7822C5.5192 20 6.07899 20 7.19691 20H16.8031C17.921 20 18.48 20 18.9074 19.7822C19.2837 19.5905 19.5905 19.2842 19.7822 18.9079C20 18.4805 20 17.9215 20 16.8036V7.19691C20 6.07899 20 5.5192 19.7822 5.0918C19.5905 4.71547 19.2837 4.40973 18.9074 4.21799C18.4796 4 17.9203 4 16.8002 4H7.2002C6.08009 4 5.51962 4 5.0918 4.21799C4.71547 4.40973 4.40973 4.71547 4.21799 5.0918C4 5.51962 4 6.08009 4 7.2002Z' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g> </g></svg>"
+    buttonGroup.append(checkboxButton);
+
+    const editButton = button.cloneNode();
+    editButton.classList.add("main-button");
+    editButton.setAttribute("aria-label", "Edit task");
+    editButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill='#c2c0b6' stroke='#c2c0b6'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title></title> <g id='Complete'> <g id='edit'> <g> <path d='M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8' fill='none' stroke='#c2c0b6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'></path> <polygon fill='none' points='12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8' stroke='#c2c0b6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'></polygon> </g> </g> </g> </g></svg>"
+    buttonGroup.append(editButton);
+
+    const deleteButton = button.cloneNode();
+    deleteButton.classList.add("main-button");
+    deleteButton.setAttribute("aria-label", "Delete task");
+    deleteButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path d='M4 7H20' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M6 10L7.70141 19.3578C7.87432 20.3088 8.70258 21 9.66915 21H14.3308C15.2974 21 16.1257 20.3087 16.2986 19.3578L18 10' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g></svg>";
+    buttonGroup.append(deleteButton);
 
     const description = p.cloneNode();
     description.classList.add("description");
@@ -166,9 +210,27 @@ function renderProject(index) {
             taskTitle.innerText = taskList[i].title;
             taskGroup1.append(taskTitle);
 
-            const taskCompleted = p.cloneNode();
-            taskCompleted.innerText = `Completed: ${taskList[i].completed}`;
-            taskGroup1.append(taskCompleted);
+            const taskButtonGroup = div.cloneNode();
+            taskButtonGroup.classList.add("main-item-group");
+            taskGroup1.append(taskButtonGroup);
+
+            const checkboxButton = button.cloneNode();
+            checkboxButton.classList.add("main-button");
+            checkboxButton.setAttribute("aria-label", "Check task");
+            checkboxButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <g id='Interface / Checkbox_Unchecked'> <path id='Vector' d='M4 7.2002V16.8002C4 17.9203 4 18.4801 4.21799 18.9079C4.40973 19.2842 4.71547 19.5905 5.0918 19.7822C5.5192 20 6.07899 20 7.19691 20H16.8031C17.921 20 18.48 20 18.9074 19.7822C19.2837 19.5905 19.5905 19.2842 19.7822 18.9079C20 18.4805 20 17.9215 20 16.8036V7.19691C20 6.07899 20 5.5192 19.7822 5.0918C19.5905 4.71547 19.2837 4.40973 18.9074 4.21799C18.4796 4 17.9203 4 16.8002 4H7.2002C6.08009 4 5.51962 4 5.0918 4.21799C4.71547 4.40973 4.40973 4.71547 4.21799 5.0918C4 5.51962 4 6.08009 4 7.2002Z' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g> </g></svg>"
+            taskButtonGroup.append(checkboxButton);
+
+            const editButton = button.cloneNode();
+            editButton.classList.add("main-button");
+            editButton.setAttribute("aria-label", "Edit task");
+            editButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill='#c2c0b6' stroke='#c2c0b6'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title></title> <g id='Complete'> <g id='edit'> <g> <path d='M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8' fill='none' stroke='#c2c0b6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'></path> <polygon fill='none' points='12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8' stroke='#c2c0b6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'></polygon> </g> </g> </g> </g></svg>"
+            taskButtonGroup.append(editButton);
+
+            const deleteButton = button.cloneNode();
+            deleteButton.classList.add("main-button");
+            deleteButton.setAttribute("aria-label", "Delete task");
+            deleteButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path d='M4 7H20' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M6 10L7.70141 19.3578C7.87432 20.3088 8.70258 21 9.66915 21H14.3308C15.2974 21 16.1257 20.3087 16.2986 19.3578L18 10' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g></svg>";
+            taskButtonGroup.append(deleteButton);
 
             const taskDescription = p.cloneNode();
             taskDescription.classList.add("description");
@@ -179,6 +241,10 @@ function renderProject(index) {
             taskGroup2.classList.add("main-item-group");
             task.append(taskGroup2);
 
+            const taskProject = p.cloneNode();
+            taskProject.innerText = `Project: ${taskList[i].project}`;
+            taskGroup2.append(taskProject);
+
             const taskPriority = p.cloneNode();
             taskPriority.innerText = `Priority: ${taskList[i].priority}`;
             taskGroup2.append(taskPriority);
@@ -186,8 +252,32 @@ function renderProject(index) {
             const taskDueDate = p.cloneNode();
             taskDueDate.innerText = taskList[i].dueDate;
             taskGroup2.append(taskDueDate);
+
+            checkboxButton.addEventListener("click", () => {
+                console.log(`checkbox button from task "${taskList[i].title}" pressed`);
+            });
+
+            editButton.addEventListener("click", () => {
+                console.log(`edit button from task "${taskList[i].title}" pressed`);
+            });
+            
+            deleteButton.addEventListener("click", () => {
+                console.log(`delete button from task "${taskList[i].title}" pressed`);
+            });
         };
     };
+
+    checkboxButton.addEventListener("click", () => {
+        console.log(`checkbox button from project "${currentPage}" pressed`);
+    });
+
+    editButton.addEventListener("click", () => {
+        console.log(`edit button from project "${currentPage}" pressed`);
+    });
+            
+    deleteButton.addEventListener("click", () => {
+        console.log(`delete button from project "${currentPage}" pressed`);
+    });
 };
 
 function renderCurrentPage() {
@@ -262,11 +352,10 @@ newProjectDialogForm.addEventListener("submit", () => {
 });
 
 
-// create detailed task view similar to project view
 // rename tasks and projects to allTasks and allProjects
 
-// create project view
 // reevalutate what needs to be done
 // checkbox, edit svg, delete svg
 // projects and tasks view description limits with ... maybe can click to expand?
 // local storage
+// sorting by recent or completed?
