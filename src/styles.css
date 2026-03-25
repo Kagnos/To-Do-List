@@ -88,6 +88,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #main {
     min-height: 100vh;
+    min-width: 800px;
     margin-left: 320px;
     background-color: var(--main-background-color);
     color: var(--text-color);
