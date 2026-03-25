@@ -82,7 +82,7 @@ function renderTasks() {
         group2.append(priority);
                     
         const dueDate = p.cloneNode();
-        dueDate.innerText = taskList[i].dueDate;
+        dueDate.innerText = `Due: ${taskList[i].dueDate}`;
         group2.append(dueDate);
 
         checkboxButton.addEventListener("click", () => {
@@ -136,7 +136,7 @@ function renderProjects() {
         group2.append(priority);
 
         const dueDate = p.cloneNode();
-        dueDate.innerText = projectList[i].dueDate;
+        dueDate.innerText = `Due: ${projectList[i].dueDate}`
         group2.append(dueDate);
 
         project.addEventListener("click", () => {
@@ -165,7 +165,7 @@ function renderProject(index) {
     group1.append(priority);
 
     const dueDate = p.cloneNode();
-    dueDate.innerText = projectList[index].dueDate;
+    dueDate.innerText = `Due: ${projectList[i].dueDate}`
     group1.append(dueDate);
     
     const buttonGroup = div.cloneNode();
@@ -250,7 +250,7 @@ function renderProject(index) {
             group2.append(priority);
                     
             const dueDate = p.cloneNode();
-            dueDate.innerText = taskList[i].dueDate;
+            dueDate.innerText = `Due: ${taskList[i].dueDate}`;
             group2.append(dueDate);
 
             checkboxButton.addEventListener("click", () => {
