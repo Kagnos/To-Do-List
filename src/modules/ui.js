@@ -30,7 +30,9 @@ function renderTasks() {
 
     for(let i = 0; i < taskList.length; i++) {
         const task = div.cloneNode();
-        task.classList.add("main-task")
+        task.classList.add("main-task");
+        // projectList[index].completed ? taskList[i].completed = true : taskList[i].completed = false;
+        if (taskList[i].completed === true) task.classList.add("completed");
         task.dataset.index = i;
         main.append(task);
 
@@ -111,7 +113,8 @@ function renderProjects() {
 
     for(let i = 0; i < projectList.length; i++) {
         const project = button.cloneNode();
-        project.classList.add("main-project")
+        project.classList.add("main-project");
+        if (projectList[i].completed === true) project.classList.add("completed");
         project.dataset.index = i;
         main.append(project);
 
@@ -195,10 +198,18 @@ function renderProject(index) {
     description.innerText = projectList[index].description;
     main.append(description);
 
+    if (projectList[index].completed === true) {
+        mainTitle.classList.add("completed");
+        group1.classList.add("completed");
+        description.classList.add("completed");
+    };
+
     for(let i = 0; i < taskList.length; i++) {
         if (currentPage === taskList[i].project) {
             const task = div.cloneNode();
-            task.classList.add("main-task")
+            task.classList.add("main-task");
+            projectList[index].completed ? taskList[i].completed = true : taskList[i].completed = false;
+            if (taskList[i].completed === true) task.classList.add("completed");
             task.dataset.index = i;
             main.append(task);
 
@@ -366,6 +377,8 @@ newProjectDialogForm.addEventListener("submit", () => {
 renderTasks();
 
 // change allButtons to sidebarButtons
+// replace renderCurrentPage(index) with renderProject(index)
+// do I really need data index?
 
 // checkbox icon switch and gray out or strikethrough text
 // edit button modal

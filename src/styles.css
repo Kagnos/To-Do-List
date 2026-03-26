@@ -68,6 +68,7 @@ h1, h2, h3, h4, h5, h6 {
     --form-item-background-color: #30302e;
     --text-color: #c2c0b6;
     --text-color-light: #faf9f5;
+    --text-color-dark: #8b8983;
 }
 
 /* Layout Containers */
@@ -162,7 +163,8 @@ button:hover {
 }
 
 .main-task {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     gap: 5px;
     border: 2px solid var(--border-color);
@@ -174,7 +176,6 @@ button:hover {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 4fr 1fr;
-    color: inherit;
     gap: 5px;
     background-color: var(--main-background-color);
     border: 2px solid var(--border-color);
@@ -197,6 +198,11 @@ button:hover {
     width: 25px;
     height: 25px;
     margin: 3px 0;
+}
+
+.completed {
+    color: var(--text-color-dark);
+    text-decoration: line-through;
 }
 
 /* Dialog */
