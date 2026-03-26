@@ -1,6 +1,6 @@
 import { createTask } from "./tasks.js"
 import { createProject } from "./projects.js"
-import { addTask, addProject, taskList, projectList, currentPage, updateCurrentPage } from "./state.js"
+import { addTask, addProject, taskList, projectList, currentPage, updateCurrentPage, toggleCompleted } from "./state.js"
 
 const allButtons = document.querySelectorAll("button");
 
@@ -85,7 +85,9 @@ function renderTasks() {
         group2.append(dueDate);
 
         checkboxButton.addEventListener("click", () => {
-            console.log(`checkbox button from task "${taskList[i].title}" pressed`);
+            toggleCompleted(taskList, i);
+            clearMainDOM();
+            renderTasks();
         });
 
         editButton.addEventListener("click", () => {
@@ -251,7 +253,9 @@ function renderProject(index) {
             group2.append(dueDate);
 
             checkboxButton.addEventListener("click", () => {
-                console.log(`checkbox button from task "${taskList[i].title}" pressed`);
+                toggleCompleted(taskList, i);
+                clearMainDOM();
+                renderCurrentPage(index);
             });
 
             editButton.addEventListener("click", () => {
@@ -265,7 +269,9 @@ function renderProject(index) {
     };
 
     checkboxButton.addEventListener("click", () => {
-        console.log(`checkbox button from project "${currentPage}" pressed`);
+        toggleCompleted(projectList, index);
+        clearMainDOM();
+        renderCurrentPage(index);
     });
 
     editButton.addEventListener("click", () => {
@@ -277,15 +283,10 @@ function renderProject(index) {
     });
 };
 
-function renderCurrentPage() {
-    switch (currentPage) {
-        case "tasks":
-            clearMainDOM();
-            return renderTasks();
-        case "projects":
-            clearMainDOM();
-            return renderProjects();
-    };
+function renderCurrentPage(pageIndex) {
+    if (pageIndex === "tasks") renderTasks(); 
+    else if (pageIndex === "projects") renderProjects();
+    else renderProject(pageIndex);
 };
 
 function renderNewTaskProjectOptions() {
@@ -349,7 +350,8 @@ newTaskDialogForm.addEventListener("submit", () => {
     const task = createTask(data);
     addTask(task);
     newTaskDialogForm.reset();
-    renderCurrentPage();
+    clearMainDOM();
+    renderCurrentPage(currentPage);
 });
 
 newProjectDialogForm.addEventListener("submit", () => {
@@ -357,7 +359,8 @@ newProjectDialogForm.addEventListener("submit", () => {
     const project = createProject(data);
     addProject(project);
     newProjectDialogForm.reset();
-    renderCurrentPage();
+    clearMainDOM();
+    renderCurrentPage(currentPage);
 });
 
 

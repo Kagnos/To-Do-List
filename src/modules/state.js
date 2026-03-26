@@ -12,3 +12,5 @@ export function addProject(project) {
 };
 
 export const updateCurrentPage = (page) => currentPage = page;
+
+export const toggleCompleted = (list, index) => list[index].completed = !list[index].completed;
