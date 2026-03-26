@@ -363,6 +363,7 @@ newProjectDialogForm.addEventListener("submit", () => {
     renderCurrentPage(currentPage);
 });
 
+renderTasks();
 
 // change allButtons to sidebarButtons
 
