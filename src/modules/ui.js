@@ -31,7 +31,7 @@ function renderTasks() {
     for(let i = 0; i < taskList.length; i++) {
         const task = div.cloneNode();
         task.classList.add("main-task");
-        // projectList[index].completed ? taskList[i].completed = true : taskList[i].completed = false;
+        if (typeof taskList[i].project === "number") projectList[taskList[i].project].completed ? taskList[i].completed = true : taskList[i].completed = false;
         if (taskList[i].completed === true) task.classList.add("completed");
         task.dataset.index = i;
         main.append(task);
@@ -75,7 +75,8 @@ function renderTasks() {
         task.append(group2);
 
         const project = p.cloneNode();
-        project.innerText = `Project: ${taskList[i].project}`;
+        if (typeof taskList[i].project === "number") project.innerText = `Project: ${projectList[taskList[i].project].title}`;
+        else project.innerText = `Project: ${taskList[i].project}`;
         group2.append(project);
 
         const priority = p.cloneNode();
@@ -144,7 +145,7 @@ function renderProjects() {
         group2.append(dueDate);
 
         project.addEventListener("click", () => {
-            updateCurrentPage(projectList[i].title);
+            updateCurrentPage(i);
             clearMainDOM();
             renderProject(project.dataset.index);
         });
@@ -252,7 +253,8 @@ function renderProject(index) {
             task.append(group2);
 
             const project = p.cloneNode();
-            project.innerText = `Project: ${taskList[i].project}`;
+            if (taskList.project === "None") project.innerText = `Project: ${taskList[i].project}`;
+            else project.innerText = `Project: ${projectList[taskList[i].project].title}`;
             group2.append(project);
 
             const priority = p.cloneNode();
@@ -295,8 +297,8 @@ function renderProject(index) {
 };
 
 function renderCurrentPage(pageIndex) {
-    if (pageIndex === 0) renderTasks();
-    else if (pageIndex === 1) renderProjects();
+    if (pageIndex === "tasks") renderTasks();
+    else if (pageIndex === "projects") renderProjects();
     else renderProject(pageIndex);
 };
 
@@ -311,7 +313,7 @@ function renderNewTaskProjectOptions() {
 
     for(let i = 0; i < projectList.length; i++) {
         const projectOption = option.cloneNode();
-        projectOption.setAttribute("value", projectList[i].title);
+        projectOption.setAttribute("value", i);
         projectOption.innerText = projectList[i].title;
         taskProjectSelect.append(projectOption);
     };
@@ -345,11 +347,11 @@ allButtons.forEach(button => {
                 newProjectDialogForm.reset();
                 return newProjectDialog.close();
             case "view-tasks-sidebar-button":
-                updateCurrentPage(0);
+                updateCurrentPage("tasks");
                 clearMainDOM();
                 return renderTasks();
             case "view-projects-sidebar-button":
-                updateCurrentPage(1);
+                updateCurrentPage("projects");
                 clearMainDOM();
                 return renderProjects();
         };

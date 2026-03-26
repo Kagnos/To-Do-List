@@ -1,7 +1,7 @@
 export const taskList = [];
 export const projectList = [];
 
-export let currentPage = 0;
+export let currentPage = "tasks";
 
 export function addTask(task) {
     taskList.push(task);
