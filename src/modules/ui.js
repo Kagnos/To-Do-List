@@ -284,8 +284,8 @@ function renderProject(index) {
 };
 
 function renderCurrentPage(pageIndex) {
-    if (pageIndex === "tasks") renderTasks(); 
-    else if (pageIndex === "projects") renderProjects();
+    if (pageIndex === 0) renderTasks();
+    else if (pageIndex === 1) renderProjects();
     else renderProject(pageIndex);
 };
 
@@ -334,11 +334,11 @@ allButtons.forEach(button => {
                 newProjectDialogForm.reset();
                 return newProjectDialog.close();
             case "view-tasks-sidebar-button":
-                updateCurrentPage("tasks");
+                updateCurrentPage(0);
                 clearMainDOM();
                 return renderTasks();
             case "view-projects-sidebar-button":
-                updateCurrentPage("projects");
+                updateCurrentPage(1);
                 clearMainDOM();
                 return renderProjects();
         };
