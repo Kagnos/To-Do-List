@@ -5,6 +5,6 @@ export function createTask(data) {
         dueDate: data.task_due_date,
         priority: data.task_priority,
         completed: false,
-        project: parseInt(data.task_project),
+        project: data.task_project,
     };
 };

@@ -360,6 +360,7 @@ allButtons.forEach(button => {
 
 newTaskDialogForm.addEventListener("submit", () => {
     const data = Object.fromEntries(new FormData(newTaskDialogForm));
+    if (!(isNaN(parseInt(data.task_project)))) data.task_project = parseInt(data.task_project);
     const task = createTask(data);
     addTask(task);
     newTaskDialogForm.reset();
@@ -380,7 +381,8 @@ renderTasks();
 
 // change allButtons to sidebarButtons
 // replace renderCurrentPage(index) with renderProject(index)
-// do I really need data index?
+// do I really need data index? do I really need index?
+// why dont task checkboxes work? you should be able to uncheck a task even if its project is checked - in that case it would uncheck the project as well
 
 // checkbox icon switch and gray out or strikethrough text
 // edit button modal
