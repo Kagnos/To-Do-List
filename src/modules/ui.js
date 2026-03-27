@@ -31,7 +31,6 @@ function renderTasks() {
     for(let i = 0; i < taskList.length; i++) {
         const task = div.cloneNode();
         task.classList.add("main-task");
-        if (typeof taskList[i].project === "number") projectList[taskList[i].project].completed ? taskList[i].completed = true : taskList[i].completed = false;
         if (taskList[i].completed === true) task.classList.add("completed");
         task.dataset.index = i;
         main.append(task);
@@ -209,7 +208,6 @@ function renderProject(index) {
         if (currentPage === taskList[i].project) {
             const task = div.cloneNode();
             task.classList.add("main-task");
-            projectList[index].completed ? taskList[i].completed = true : taskList[i].completed = false;
             if (taskList[i].completed === true) task.classList.add("completed");
             task.dataset.index = i;
             main.append(task);
@@ -388,6 +386,7 @@ renderTasks();
 // edit button modal
 // delete button are you sure? and delete
 
+// pressing esc on a dialog should clear it the same as pressing the close dialog button
 // projects and tasks view description limits with ... maybe can click to expand? Or a ...more ...less button you can click
 // local storage
 // sorting by recent or completed?
