@@ -88,7 +88,7 @@ function renderTasks() {
         checkboxButton.addEventListener("click", () => {
             toggleCompleted(taskList, i);
             clearMainDOM();
-            renderTasks();
+            renderCurrentPage();
         });
 
         editButton.addEventListener("click", () => {
@@ -98,7 +98,7 @@ function renderTasks() {
         deleteButton.addEventListener("click", () => {
             deleteTask(i);
             clearMainDOM();
-            renderTasks();
+            renderCurrentPage();
         });
     };
 };
@@ -146,7 +146,7 @@ function renderProjects() {
         project.addEventListener("click", () => {
             updateCurrentPage(i);
             clearMainDOM();
-            renderProject(i);
+            renderCurrentPage();
         });
     };
 };
@@ -265,7 +265,7 @@ function renderProject(index) {
             checkboxButton.addEventListener("click", () => {
                 toggleCompleted(taskList, i);
                 clearMainDOM();
-                renderProject(index);
+                renderCurrentPage();
             });
 
             editButton.addEventListener("click", () => {
@@ -275,7 +275,7 @@ function renderProject(index) {
             deleteButton.addEventListener("click", () => {
                 deleteTask(i);
                 clearMainDOM();
-                renderProject(index);
+                renderCurrentPage();
             });
         };
     };
@@ -283,7 +283,7 @@ function renderProject(index) {
     checkboxButton.addEventListener("click", () => {
         toggleCompleted(projectList, index);
         clearMainDOM();
-        renderProject(index);
+        renderCurrentPage();
     });
 
     editButton.addEventListener("click", () => {
@@ -292,15 +292,16 @@ function renderProject(index) {
             
     deleteButton.addEventListener("click", () => {
         deleteProject(index);
+        updateCurrentPage("projects");
         clearMainDOM();
-        renderProjects();
+        renderCurrentPage();
     });
 };
 
-function renderCurrentPage(pageIndex) {
-    if (pageIndex === "tasks") renderTasks();
-    else if (pageIndex === "projects") renderProjects();
-    else renderProject(pageIndex);
+function renderCurrentPage() {
+    if (currentPage === "tasks") renderTasks();
+    else if (currentPage === "projects") renderProjects();
+    else renderProject(currentPage);
 };
 
 function renderNewTaskProjectOptions() {
@@ -350,11 +351,11 @@ allButtons.forEach(button => {
             case "view-tasks-sidebar-button":
                 updateCurrentPage("tasks");
                 clearMainDOM();
-                return renderTasks();
+                return renderCurrentPage();
             case "view-projects-sidebar-button":
                 updateCurrentPage("projects");
                 clearMainDOM();
-                return renderProjects();
+                return renderCurrentPage();
         };
     });
 });
@@ -366,7 +367,7 @@ newTaskDialogForm.addEventListener("submit", () => {
     addTask(task);
     newTaskDialogForm.reset();
     clearMainDOM();
-    renderCurrentPage(currentPage);
+    renderCurrentPage();
 });
 
 newProjectDialogForm.addEventListener("submit", () => {
@@ -375,7 +376,7 @@ newProjectDialogForm.addEventListener("submit", () => {
     addProject(project);
     newProjectDialogForm.reset();
     clearMainDOM();
-    renderCurrentPage(currentPage);
+    renderCurrentPage();
 });
 
 newTaskDialog.addEventListener("cancel", () => {
@@ -386,10 +387,8 @@ newProjectDialog.addEventListener("cancel", () => {
   newProjectDialogForm.reset();
 });
 
-renderTasks();
+renderCurrentPage();
 
-
-// renderCurrentPage should always be used so I know currentPage is kept up to date
 
 // edit button modal
 // delete button are you sure? and delete
