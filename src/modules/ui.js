@@ -32,7 +32,6 @@ function renderTasks() {
         const task = div.cloneNode();
         task.classList.add("main-task");
         if (taskList[i].completed === true) task.classList.add("completed");
-        task.dataset.index = i;
         main.append(task);
 
         const group1 = div.cloneNode();
@@ -115,7 +114,6 @@ function renderProjects() {
         const project = button.cloneNode();
         project.classList.add("main-project");
         if (projectList[i].completed === true) project.classList.add("completed");
-        project.dataset.index = i;
         main.append(project);
 
         const group1 = div.cloneNode();
@@ -146,7 +144,7 @@ function renderProjects() {
         project.addEventListener("click", () => {
             updateCurrentPage(i);
             clearMainDOM();
-            renderProject(project.dataset.index);
+            renderProject(i);
         });
     };
 };
@@ -209,7 +207,6 @@ function renderProject(index) {
             const task = div.cloneNode();
             task.classList.add("main-task");
             if (taskList[i].completed === true) task.classList.add("completed");
-            task.dataset.index = i;
             main.append(task);
 
             const group1 = div.cloneNode();
@@ -378,7 +375,6 @@ newProjectDialogForm.addEventListener("submit", () => {
 renderTasks();
 
 
-// do I really need data index? do I really need index?
 // why dont task checkboxes work? you should be able to uncheck a task even if its project is checked - in that case it would uncheck the project as well
 
 // checkbox icon switch and gray out or strikethrough text
