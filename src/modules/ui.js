@@ -372,12 +372,17 @@ newProjectDialogForm.addEventListener("submit", () => {
     renderCurrentPage(currentPage);
 });
 
+newTaskDialog.addEventListener("cancel", () => {
+  newTaskDialogForm.reset();
+});
+
+newProjectDialog.addEventListener("cancel", () => {
+  newProjectDialogForm.reset();
+});
+
 renderTasks();
 
 
-// why dont task checkboxes work? you should be able to uncheck a task even if its project is checked - in that case it would uncheck the project as well
-
-// checkbox icon switch and gray out or strikethrough text
 // edit button modal
 // delete button are you sure? and delete
 
