@@ -266,7 +266,7 @@ function renderProject(index) {
             checkboxButton.addEventListener("click", () => {
                 toggleCompleted(taskList, i);
                 clearMainDOM();
-                renderCurrentPage(index);
+                renderProject(index);
             });
 
             editButton.addEventListener("click", () => {
@@ -282,7 +282,7 @@ function renderProject(index) {
     checkboxButton.addEventListener("click", () => {
         toggleCompleted(projectList, index);
         clearMainDOM();
-        renderCurrentPage(index);
+        renderProject(index);
     });
 
     editButton.addEventListener("click", () => {
@@ -377,8 +377,7 @@ newProjectDialogForm.addEventListener("submit", () => {
 
 renderTasks();
 
-// change allButtons to sidebarButtons
-// replace renderCurrentPage(index) with renderProject(index)
+
 // do I really need data index? do I really need index?
 // why dont task checkboxes work? you should be able to uncheck a task even if its project is checked - in that case it would uncheck the project as well
 
