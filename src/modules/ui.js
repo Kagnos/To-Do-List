@@ -6,18 +6,20 @@ const allButtons = document.querySelectorAll("button");
 
 const newTaskDialog = document.querySelector("#new-task-dialog");
 const newTaskDialogForm = document.querySelector("#new-task-dialog-form");
+const newTaskProjectSelect = document.querySelector("#new-task-project");
 const newProjectDialog = document.querySelector("#new-project-dialog");
 const newProjectDialogForm = document.querySelector("#new-project-dialog-form");
+const editTaskDialog = document.querySelector("#edit-task-dialog");
+const editTaskDialogForm = document.querySelector("#edit-task-dialog-form");
 
 const main = document.querySelector("#main");
 const p = document.createElement("p");
 const div = document.createElement("div");
 const button = document.createElement("button");
-const taskProjectSelect = document.querySelector("#task-project");
 
 const clearMainDOM = () => main.innerHTML = "";
 
-const clearNewTaskDialogDOM = () => taskProjectSelect.innerHTML = "";
+const clearNewTaskDialogDOM = () => newTaskProjectSelect.innerHTML = "";
 
 function renderTasks() {
     main.classList.remove("grid-view");
@@ -311,13 +313,13 @@ function renderNewTaskProjectOptions() {
     noneOption.setAttribute("value", "None");
     noneOption.setAttribute("selected", "");
     noneOption.innerText = "None";
-    taskProjectSelect.append(noneOption);
+    newTaskProjectSelect.append(noneOption);
 
     for(let i = 0; i < projectList.length; i++) {
         const projectOption = option.cloneNode();
         projectOption.setAttribute("value", i);
         projectOption.innerText = projectList[i].title;
-        taskProjectSelect.append(projectOption);
+        newTaskProjectSelect.append(projectOption);
     };
 };
 

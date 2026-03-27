@@ -1,10 +1,10 @@
 export function createTask(data) {
     return {
-        title: data.task_title,
-        description: data.task_description,
-        dueDate: data.task_due_date,
-        priority: data.task_priority,
+        title: data.new_task_title,
+        description: data.new_task_description,
+        dueDate: data.new_task_due_date,
+        priority: data.new_task_priority,
         completed: false,
-        project: data.task_project,
+        project: data.new_task_project,
     };
 };
