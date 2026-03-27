@@ -1,14 +1,17 @@
-export const taskList = [];
+export let taskList = [];
 export const projectList = [];
 
 export let currentPage = "tasks";
 
-export function addTask(task) {
-    taskList.push(task);
-};
+export const addTask = (task) => taskList.push(task);
 
-export function addProject(project) {
-    projectList.push(project);
+export const addProject = (project) => projectList.push(project);
+
+export const deleteTask = (index) => taskList.splice(index, 1);
+
+export const deleteProject = (index) => {
+    projectList.splice(index, 1);
+    taskList = taskList.filter((task) => task.project !== index);
 };
 
 export const updateCurrentPage = (page) => currentPage = page;
@@ -24,4 +27,4 @@ export const toggleCompleted = (list, index) => {
     if (list === taskList && typeof list[index].project === "number" && list[index].completed === false) {
         projectList[list[index].project].completed = false;
     };
-}; 
+};

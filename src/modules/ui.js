@@ -1,6 +1,6 @@
 import { createTask } from "./tasks.js"
 import { createProject } from "./projects.js"
-import { addTask, addProject, taskList, projectList, currentPage, updateCurrentPage, toggleCompleted } from "./state.js"
+import { addTask, addProject, deleteTask, deleteProject, taskList, projectList, currentPage, updateCurrentPage, toggleCompleted } from "./state.js"
 
 const allButtons = document.querySelectorAll("button");
 
@@ -96,7 +96,9 @@ function renderTasks() {
         });
             
         deleteButton.addEventListener("click", () => {
-            console.log(`delete button from task "${taskList[i].title}" pressed`);
+            deleteTask(i);
+            clearMainDOM();
+            renderTasks();
         });
     };
 };
@@ -271,7 +273,9 @@ function renderProject(index) {
             });
             
             deleteButton.addEventListener("click", () => {
-                console.log(`delete button from task "${taskList[i].title}" pressed`);
+                deleteTask(i);
+                clearMainDOM();
+                renderProject(index);
             });
         };
     };
@@ -287,7 +291,9 @@ function renderProject(index) {
     });
             
     deleteButton.addEventListener("click", () => {
-        console.log(`delete button from project "${currentPage}" pressed`);
+        deleteProject(index);
+        clearMainDOM();
+        renderProjects();
     });
 };
 
@@ -383,10 +389,11 @@ newProjectDialog.addEventListener("cancel", () => {
 renderTasks();
 
 
+// renderCurrentPage should always be used so I know currentPage is kept up to date
+
 // edit button modal
 // delete button are you sure? and delete
 
-// pressing esc on a dialog should clear it the same as pressing the close dialog button
 // projects and tasks view description limits with ... maybe can click to expand? Or a ...more ...less button you can click
 // local storage
 // sorting by recent or completed?
