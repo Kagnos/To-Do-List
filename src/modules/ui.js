@@ -14,6 +14,10 @@ const editTaskDialogForm = document.querySelector("#edit-task-dialog-form");
 const editTaskProjectSelect = document.querySelector("#edit-task-project");
 const editProjectDialog = document.querySelector("#edit-project-dialog");
 const editProjectDialogForm = document.querySelector("#edit-project-dialog-form");
+const deleteTaskDialog = document.querySelector("#delete-task-dialog");
+const deleteTaskDialogForm = document.querySelector("#delete-task-dialog-form");
+const deleteProjectDialog = document.querySelector("#delete-project-dialog");
+const deleteProjectDialogForm = document.querySelector("#delete-project-dialog-form");
 
 const main = document.querySelector("#main");
 const p = document.createElement("p");
@@ -102,9 +106,8 @@ function renderTasks() {
         });
             
         deleteButton.addEventListener("click", () => {
-            deleteTask(i);
-            clearDOM(main);
-            renderCurrentPage();
+            updateCurrentIndex(i);
+            deleteTaskDialog.showModal();
         });
     };
 };
@@ -282,9 +285,8 @@ function renderProject(index) {
             });
             
             deleteButton.addEventListener("click", () => {
-                deleteTask(i);
-                clearDOM(main);
-                renderCurrentPage();
+                updateCurrentIndex(i);
+                deleteTaskDialog.showModal();
             });
         };
     };
@@ -302,10 +304,8 @@ function renderProject(index) {
     });
             
     deleteButton.addEventListener("click", () => {
-        deleteProject(index);
-        updateCurrentPage("projects");
-        clearDOM(main);
-        renderCurrentPage();
+        updateCurrentIndex(index);    
+        deleteProjectDialog.showModal();
     });
 };
 
@@ -408,6 +408,10 @@ allButtons.forEach(button => {
             case "edit-project-dialog-cancel-button":
                 editProjectDialogForm.reset();
                 return editProjectDialog.close();
+            case "delete-task-dialog-cancel-button":
+                return deleteTaskDialog.close();
+            case "delete-project-dialog-cancel-button":
+                return deleteProjectDialog.close();
         };
     });
 });
@@ -456,12 +460,22 @@ editProjectDialogForm.addEventListener("submit", () => {
 editTaskDialog.addEventListener("cancel", () => editTaskDialogForm.reset());
 editProjectDialog.addEventListener("cancel", () => editProjectDialogForm.reset());
 
+deleteTaskDialogForm.addEventListener("submit", () => {
+    deleteTask(currentIndex);
+    clearDOM(main);
+    renderCurrentPage();
+});
+
+deleteProjectDialogForm.addEventListener("submit", () => {
+    updateCurrentPage("projects");
+    deleteProject(currentIndex);
+    clearDOM(main);
+    renderCurrentPage();
+});
+
 renderCurrentPage();
 
-// i need to figure out how track the index through to editTask and editProject to edit the right task or project
-// i need to find out how to track the completed status through creating the task or project. I could also just gray out the edit and delete buttons when it's completed so I don't have to check for it
 
-// edit button modal
 // delete button are you sure? and delete
 
 // projects and tasks view description limits with ... maybe can click to expand? Or a ...more ...less button you can click
