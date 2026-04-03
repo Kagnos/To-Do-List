@@ -1,6 +1,6 @@
 import { createTask } from "./tasks.js"
 import { createProject } from "./projects.js"
-import { addTask, addProject, deleteTask, deleteProject, taskList, projectList, currentPage, updateCurrentPage, toggleCompleted } from "./state.js"
+import { addTask, addProject, deleteTask, deleteProject, taskList, projectList, currentPage, currentIndex, updateCurrentIndex, updateCurrentPage, toggleCompleted, editTask, editProject } from "./state.js"
 
 const allButtons = document.querySelectorAll("button");
 
@@ -11,15 +11,16 @@ const newProjectDialog = document.querySelector("#new-project-dialog");
 const newProjectDialogForm = document.querySelector("#new-project-dialog-form");
 const editTaskDialog = document.querySelector("#edit-task-dialog");
 const editTaskDialogForm = document.querySelector("#edit-task-dialog-form");
+const editTaskProjectSelect = document.querySelector("#edit-task-project");
+const editProjectDialog = document.querySelector("#edit-project-dialog");
+const editProjectDialogForm = document.querySelector("#edit-project-dialog-form");
 
 const main = document.querySelector("#main");
 const p = document.createElement("p");
 const div = document.createElement("div");
 const button = document.createElement("button");
 
-const clearMainDOM = () => main.innerHTML = "";
-
-const clearNewTaskDialogDOM = () => newTaskProjectSelect.innerHTML = "";
+const clearDOM = (element) => element.innerHTML = "";
 
 function renderTasks() {
     main.classList.remove("grid-view");
@@ -89,17 +90,20 @@ function renderTasks() {
 
         checkboxButton.addEventListener("click", () => {
             toggleCompleted(taskList, i);
-            clearMainDOM();
+            clearDOM(main);
             renderCurrentPage();
         });
 
         editButton.addEventListener("click", () => {
-            console.log(`edit button from task "${taskList[i].title}" pressed`);
+            updateCurrentIndex(i);
+            clearDOM(editTaskProjectSelect);
+            renderEditDialogForm(taskList, i);
+            editTaskDialog.showModal();
         });
             
         deleteButton.addEventListener("click", () => {
             deleteTask(i);
-            clearMainDOM();
+            clearDOM(main);
             renderCurrentPage();
         });
     };
@@ -147,7 +151,7 @@ function renderProjects() {
 
         project.addEventListener("click", () => {
             updateCurrentPage(i);
-            clearMainDOM();
+            clearDOM(main);
             renderCurrentPage();
         });
     };
@@ -266,17 +270,20 @@ function renderProject(index) {
 
             checkboxButton.addEventListener("click", () => {
                 toggleCompleted(taskList, i);
-                clearMainDOM();
+                clearDOM(main);
                 renderCurrentPage();
             });
 
             editButton.addEventListener("click", () => {
-                console.log(`edit button from task "${taskList[i].title}" pressed`);
+                updateCurrentIndex(i);
+                clearDOM(editTaskProjectSelect);
+                renderEditDialogForm(taskList, i);
+                editTaskDialog.showModal();
             });
             
             deleteButton.addEventListener("click", () => {
                 deleteTask(i);
-                clearMainDOM();
+                clearDOM(main);
                 renderCurrentPage();
             });
         };
@@ -284,18 +291,20 @@ function renderProject(index) {
 
     checkboxButton.addEventListener("click", () => {
         toggleCompleted(projectList, index);
-        clearMainDOM();
+        clearDOM(main);
         renderCurrentPage();
     });
 
     editButton.addEventListener("click", () => {
-        console.log(`edit button from project "${currentPage}" pressed`);
+        updateCurrentIndex(index);
+        renderEditDialogForm(projectList, index);
+        editProjectDialog.showModal();
     });
             
     deleteButton.addEventListener("click", () => {
         deleteProject(index);
         updateCurrentPage("projects");
-        clearMainDOM();
+        clearDOM(main);
         renderCurrentPage();
     });
 };
@@ -306,20 +315,51 @@ function renderCurrentPage() {
     else renderProject(currentPage);
 };
 
-function renderNewTaskProjectOptions() {
+function renderTaskProjectOptions(taskProjectSelect, index) {
     const option = document.createElement("option");
 
     const noneOption = option.cloneNode();
     noneOption.setAttribute("value", "None");
-    noneOption.setAttribute("selected", "");
+    if (taskProjectSelect === newTaskProjectSelect) noneOption.setAttribute("selected", "");
     noneOption.innerText = "None";
-    newTaskProjectSelect.append(noneOption);
+    taskProjectSelect.append(noneOption);
 
     for(let i = 0; i < projectList.length; i++) {
         const projectOption = option.cloneNode();
         projectOption.setAttribute("value", i);
+        if (taskProjectSelect === editTaskProjectSelect && taskList[index].project === i) {
+            projectOption.setAttribute("selected", "");
+        };
         projectOption.innerText = projectList[i].title;
-        newTaskProjectSelect.append(projectOption);
+        taskProjectSelect.append(projectOption);
+    };
+};
+
+function renderEditDialogForm (list, index) {
+    if (list === taskList) {
+        const title = document.querySelector("#edit-task-title");
+        const description = document.querySelector("#edit-task-description");
+        const dueDate = document.querySelector("#edit-task-due-date");
+        const priority = document.querySelector("#edit-task-priority");
+        const project = document.querySelector("#edit-task-project");
+
+        title.value = list[index].title;
+        description.value = list[index].description;
+        dueDate.value = list[index].dueDate;
+        priority.value = list[index].priority;
+        project.value = list[index].project;
+
+        renderTaskProjectOptions(editTaskProjectSelect, index);
+    } else if (list === projectList) {
+        const title = document.querySelector("#edit-project-title");
+        const description = document.querySelector("#edit-project-description");
+        const dueDate = document.querySelector("#edit-project-due-date");
+        const priority = document.querySelector("#edit-project-priority");
+
+        title.value = list[index].title;
+        description.value = list[index].description;
+        dueDate.value = list[index].dueDate;
+        priority.value = list[index].priority;
     };
 };
 
@@ -335,12 +375,16 @@ function checkCompleted(checkboxButton, list, index) {
     }
 };
 
+const checkTaskProjectType = (data) => {
+    if (!(isNaN(parseInt(data.task_project)))) return data.task_project = parseInt(data.task_project);
+};
+
 allButtons.forEach(button => {
     button.addEventListener("click", () => {
         switch(button.id) {
             case "new-task-sidebar-button":
-                clearNewTaskDialogDOM();
-                renderNewTaskProjectOptions();
+                clearDOM(newTaskProjectSelect);
+                renderTaskProjectOptions(newTaskProjectSelect);
                 return newTaskDialog.showModal();
             case "new-task-dialog-cancel-button":
                 newTaskDialogForm.reset();
@@ -352,23 +396,29 @@ allButtons.forEach(button => {
                 return newProjectDialog.close();
             case "view-tasks-sidebar-button":
                 updateCurrentPage("tasks");
-                clearMainDOM();
+                clearDOM(main);
                 return renderCurrentPage();
             case "view-projects-sidebar-button":
                 updateCurrentPage("projects");
-                clearMainDOM();
+                clearDOM(main);
                 return renderCurrentPage();
+            case "edit-task-dialog-cancel-button":
+                editTaskDialogForm.reset();
+                return editTaskDialog.close();
+            case "edit-project-dialog-cancel-button":
+                editProjectDialogForm.reset();
+                return editProjectDialog.close();
         };
     });
 });
 
 newTaskDialogForm.addEventListener("submit", () => {
     const data = Object.fromEntries(new FormData(newTaskDialogForm));
-    if (!(isNaN(parseInt(data.task_project)))) data.task_project = parseInt(data.task_project);
+    checkTaskProjectType(data);
     const task = createTask(data);
     addTask(task);
     newTaskDialogForm.reset();
-    clearMainDOM();
+    clearDOM(main);
     renderCurrentPage();
 });
 
@@ -377,20 +427,39 @@ newProjectDialogForm.addEventListener("submit", () => {
     const project = createProject(data);
     addProject(project);
     newProjectDialogForm.reset();
-    clearMainDOM();
+    clearDOM(main);
     renderCurrentPage();
 });
 
-newTaskDialog.addEventListener("cancel", () => {
-  newTaskDialogForm.reset();
+newTaskDialog.addEventListener("cancel", () => newTaskDialogForm.reset());
+newProjectDialog.addEventListener("cancel", () => newProjectDialogForm.reset());
+
+editTaskDialogForm.addEventListener("submit", () => {
+    const data = Object.fromEntries(new FormData(editTaskDialogForm));
+    checkTaskProjectType(data);
+    const task = createTask(data);
+    editTask(currentIndex, task);
+    editTaskDialogForm.reset();
+    clearDOM(main);
+    renderCurrentPage();
 });
 
-newProjectDialog.addEventListener("cancel", () => {
-  newProjectDialogForm.reset();
+editProjectDialogForm.addEventListener("submit", () => {
+    const data = Object.fromEntries(new FormData(editProjectDialogForm));
+    const project = createProject(data);
+    editProject(currentIndex, project);
+    newProjectDialogForm.reset();
+    clearDOM(main);
+    renderCurrentPage();
 });
+
+editTaskDialog.addEventListener("cancel", () => editTaskDialogForm.reset());
+editProjectDialog.addEventListener("cancel", () => editProjectDialogForm.reset());
 
 renderCurrentPage();
 
+// i need to figure out how track the index through to editTask and editProject to edit the right task or project
+// i need to find out how to track the completed status through creating the task or project. I could also just gray out the edit and delete buttons when it's completed so I don't have to check for it
 
 // edit button modal
 // delete button are you sure? and delete
