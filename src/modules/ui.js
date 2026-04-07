@@ -1,6 +1,6 @@
 import { createTask } from "./tasks.js"
 import { createProject } from "./projects.js"
-import { addTask, addProject, deleteTask, deleteProject, taskList, projectList, currentPage, currentIndex, updateCurrentIndex, updateCurrentPage, toggleCompleted, editTask, editProject } from "./state.js"
+import { addTask, addProject, deleteTask, deleteProject, taskList, projectList, currentPage, currentIndex, updateCurrentIndex, updateCurrentPage, toggleCompleted, toggleDescription, editTask, editProject } from "./state.js"
 
 const allButtons = document.querySelectorAll("button");
 
@@ -70,9 +70,17 @@ function renderTasks() {
         deleteButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path d='M4 7H20' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M6 10L7.70141 19.3578C7.87432 20.3088 8.70258 21 9.66915 21H14.3308C15.2974 21 16.1257 20.3087 16.2986 19.3578L18 10' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g></svg>";
         buttonGroup.append(deleteButton);
 
-        const description = p.cloneNode();
-        description.classList.add("description");
-        description.innerText = taskList[i].description;
+        let description = p.cloneNode();
+        if (taskList[i].description.length > 100) {
+            description = button.cloneNode();
+            description.classList.add("description");
+            taskList[i].shortDescription ?
+            description.innerText = `${taskList[i].description.substring(0, 100)}...` :
+            description.innerText = taskList[i].description;
+        } else if (taskList[i].description.length > 0) {
+            description.classList.add("description");
+            description.innerText = taskList[i].description;
+        };
         task.append(description);
 
         const group2 = div.cloneNode();
@@ -108,6 +116,12 @@ function renderTasks() {
         deleteButton.addEventListener("click", () => {
             updateCurrentIndex(i);
             deleteTaskDialog.showModal();
+        });
+
+        description.addEventListener("click", () => {
+            toggleDescription(taskList, i);
+            clearDOM(main);
+            renderCurrentPage();
         });
     };
 };
@@ -202,9 +216,17 @@ function renderProject(index) {
     deleteButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path d='M4 7H20' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M6 10L7.70141 19.3578C7.87432 20.3088 8.70258 21 9.66915 21H14.3308C15.2974 21 16.1257 20.3087 16.2986 19.3578L18 10' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g></svg>";
     buttonGroup.append(deleteButton);
 
-    const description = p.cloneNode();
-    description.classList.add("description");
-    description.innerText = projectList[index].description;
+    let description = p.cloneNode();
+    if (projectList[index].description.length > 100) {
+        description = button.cloneNode();
+        description.classList.add("description");
+        projectList[index].shortDescription ?
+        description.innerText = `${projectList[index].description.substring(0, 100)}...` :
+        description.innerText = projectList[index].description;
+    } else if (projectList[index].description.length > 0) {
+        description.classList.add("description");
+        description.innerText = projectList[index].description;
+    };
     main.append(description);
 
     if (projectList[index].completed === true) {
@@ -249,9 +271,17 @@ function renderProject(index) {
             deleteButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path d='M4 7H20' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M6 10L7.70141 19.3578C7.87432 20.3088 8.70258 21 9.66915 21H14.3308C15.2974 21 16.1257 20.3087 16.2986 19.3578L18 10' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g></svg>";
             buttonGroup.append(deleteButton);
 
-            const description = p.cloneNode();
-            description.classList.add("description");
-            description.innerText = taskList[i].description;
+            let description = p.cloneNode();
+            if (taskList[i].description.length > 100) {
+                description = button.cloneNode();
+                description.classList.add("description");
+                taskList[i].shortDescription ?
+                description.innerText = `${taskList[i].description.substring(0, 100)}...` :
+                description.innerText = taskList[i].description;
+            } else if (taskList[i].description.length > 0) {
+                description.classList.add("description");
+                description.innerText = taskList[i].description;
+            };
             task.append(description);
 
             const group2 = div.cloneNode();
@@ -288,6 +318,12 @@ function renderProject(index) {
                 updateCurrentIndex(i);
                 deleteTaskDialog.showModal();
             });
+            
+            description.addEventListener("click", () => {
+                toggleDescription(taskList, i);
+                clearDOM(main);
+                renderCurrentPage();
+            });
         };
     };
 
@@ -306,6 +342,12 @@ function renderProject(index) {
     deleteButton.addEventListener("click", () => {
         updateCurrentIndex(index);    
         deleteProjectDialog.showModal();
+    });
+
+    description.addEventListener("click", () => {
+        toggleDescription(projectList, index);
+        clearDOM(main);
+        renderCurrentPage();
     });
 };
 
@@ -476,8 +518,8 @@ deleteProjectDialogForm.addEventListener("submit", () => {
 renderCurrentPage();
 
 
-// delete button are you sure? and delete
-
-// projects and tasks view description limits with ... maybe can click to expand? Or a ...more ...less button you can click
+// due date limits
 // local storage
-// sorting by recent or completed?
+// clean up code/make pretty - double check SOLID and module logic
+
+// replace "None" with -1? idk

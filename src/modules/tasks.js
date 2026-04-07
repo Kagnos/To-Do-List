@@ -5,6 +5,7 @@ export function createTask(data) {
         dueDate: data.task_due_date,
         priority: data.task_priority,
         completed: false,
+        shortDescription: true,
         project: data.task_project
     };
 };

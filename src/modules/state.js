@@ -34,3 +34,7 @@ export const toggleCompleted = (list, index) => {
         projectList[list[index].project].completed = false;
     };
 };
+
+export const toggleDescription = (list, index) => {
+    list[index].shortDescription = !list[index].shortDescription;
+};

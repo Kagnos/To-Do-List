@@ -4,6 +4,7 @@ export function createProject(data) {
         description: data.project_description,
         dueDate: data.project_due_date,
         priority: data.project_priority,
-        completed: false
+        completed: false,
+        shortDescription: true
     };
 };
