@@ -1,6 +1,7 @@
 import { createTask } from "./tasks.js"
 import { createProject } from "./projects.js"
 import { addTask, addProject, deleteTask, deleteProject, taskList, projectList, currentPage, currentIndex, updateCurrentIndex, updateCurrentPage, toggleCompleted, toggleDescription, editTask, editProject } from "./state.js"
+import { formatDistanceToNow } from 'date-fns';
 
 const allButtons = document.querySelectorAll("button");
 
@@ -97,7 +98,7 @@ function renderTasks() {
         group2.append(priority);
                     
         const dueDate = p.cloneNode();
-        dueDate.innerText = `Due: ${taskList[i].dueDate}`;
+        dueDate.innerText = `Due ${taskList[i].dueDate ? formatDistanceToNow(new Date(taskList[i].dueDate), { addSuffix: true }) : '—'}`;
         group2.append(dueDate);
 
         checkboxButton.addEventListener("click", () => {
@@ -163,7 +164,7 @@ function renderProjects() {
         group2.append(priority);
 
         const dueDate = p.cloneNode();
-        dueDate.innerText = `Due: ${projectList[i].dueDate}`
+        dueDate.innerText = `Due ${taskList[i].dueDate ? formatDistanceToNow(new Date(taskList[i].dueDate), { addSuffix: true }) : '—'}`;
         group2.append(dueDate);
 
         project.addEventListener("click", () => {
@@ -192,7 +193,7 @@ function renderProject(index) {
     group1.append(priority);
 
     const dueDate = p.cloneNode();
-    dueDate.innerText = `Due: ${projectList[index].dueDate}`
+    dueDate.innerText = `Due ${projectList[index].dueDate ? formatDistanceToNow(new Date(projectList[index].dueDate), { addSuffix: true }) : '—'}`;
     group1.append(dueDate);
     
     const buttonGroup = div.cloneNode();
@@ -298,7 +299,7 @@ function renderProject(index) {
             group2.append(priority);
                     
             const dueDate = p.cloneNode();
-            dueDate.innerText = `Due: ${taskList[i].dueDate}`;
+            dueDate.innerText = `Due ${taskList[i].dueDate ? formatDistanceToNow(new Date(taskList[i].dueDate), { addSuffix: true }) : '—'}`;
             group2.append(dueDate);
 
             checkboxButton.addEventListener("click", () => {
@@ -521,5 +522,3 @@ renderCurrentPage();
 // due date limits
 // local storage
 // clean up code/make pretty - double check SOLID and module logic
-
-// replace "None" with -1? idk
