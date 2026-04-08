@@ -1,7 +1,8 @@
 import { createTask } from "./tasks.js"
 import { createProject } from "./projects.js"
-import { addTask, addProject, deleteTask, deleteProject, taskList, projectList, currentPage, currentIndex, updateCurrentIndex, updateCurrentPage, toggleCompleted, toggleDescription, editTask, editProject } from "./state.js"
-import { formatDistanceToNow } from 'date-fns';
+import { taskList, projectList, addTask, addProject, deleteTask, deleteProject, toggleCompleted, toggleDescription, editTask, editProject } from "./state.js"
+import { updateTaskListStorage, updateProjectListStorage, updateCurrentPageStorage, updateCurrentIndexStorage } from "./storage.js";
+import { formatDistanceToNow } from "date-fns";
 
 const allButtons = document.querySelectorAll("button");
 
@@ -108,14 +109,14 @@ function renderTasks() {
         });
 
         editButton.addEventListener("click", () => {
-            updateCurrentIndex(i);
+            updateCurrentIndexStorage(i);
             clearDOM(editTaskProjectSelect);
             renderEditDialogForm(taskList, i);
             editTaskDialog.showModal();
         });
             
         deleteButton.addEventListener("click", () => {
-            updateCurrentIndex(i);
+            updateCurrentIndexStorage(i);
             deleteTaskDialog.showModal();
         });
 
@@ -164,11 +165,11 @@ function renderProjects() {
         group2.append(priority);
 
         const dueDate = p.cloneNode();
-        dueDate.innerText = `Due ${taskList[i].dueDate ? formatDistanceToNow(new Date(taskList[i].dueDate), { addSuffix: true }) : '—'}`;
+        dueDate.innerText = `Due ${projectList[i].dueDate ? formatDistanceToNow(new Date(projectList[i].dueDate), { addSuffix: true }) : '—'}`;
         group2.append(dueDate);
 
         project.addEventListener("click", () => {
-            updateCurrentPage(i);
+            updateCurrentPageStorage(i);
             clearDOM(main);
             renderCurrentPage();
         });
@@ -237,7 +238,7 @@ function renderProject(index) {
     };
 
     for(let i = 0; i < taskList.length; i++) {
-        if (currentPage === taskList[i].project) {
+        if (parseInt(localStorage.currentPage) === taskList[i].project) {
             const task = div.cloneNode();
             task.classList.add("main-task");
             if (taskList[i].completed === true) task.classList.add("completed");
@@ -309,14 +310,14 @@ function renderProject(index) {
             });
 
             editButton.addEventListener("click", () => {
-                updateCurrentIndex(i);
+                updateCurrentIndexStorage(i);
                 clearDOM(editTaskProjectSelect);
                 renderEditDialogForm(taskList, i);
                 editTaskDialog.showModal();
             });
             
             deleteButton.addEventListener("click", () => {
-                updateCurrentIndex(i);
+                updateCurrentIndexStorage(i);
                 deleteTaskDialog.showModal();
             });
             
@@ -335,13 +336,13 @@ function renderProject(index) {
     });
 
     editButton.addEventListener("click", () => {
-        updateCurrentIndex(index);
+        updateCurrentIndexStorage(index);
         renderEditDialogForm(projectList, index);
         editProjectDialog.showModal();
     });
             
     deleteButton.addEventListener("click", () => {
-        updateCurrentIndex(index);    
+        updateCurrentIndexStorage(index);    
         deleteProjectDialog.showModal();
     });
 
@@ -353,9 +354,9 @@ function renderProject(index) {
 };
 
 function renderCurrentPage() {
-    if (currentPage === "tasks") renderTasks();
-    else if (currentPage === "projects") renderProjects();
-    else renderProject(currentPage);
+    if (localStorage.currentPage === "tasks") renderTasks();
+    else if (localStorage.currentPage === "projects") renderProjects();
+    else renderProject(localStorage.currentPage);
 };
 
 function renderTaskProjectOptions(taskProjectSelect, index) {
@@ -438,11 +439,11 @@ allButtons.forEach(button => {
                 newProjectDialogForm.reset();
                 return newProjectDialog.close();
             case "view-tasks-sidebar-button":
-                updateCurrentPage("tasks");
+                updateCurrentPageStorage("tasks");
                 clearDOM(main);
                 return renderCurrentPage();
             case "view-projects-sidebar-button":
-                updateCurrentPage("projects");
+                updateCurrentPageStorage("projects");
                 clearDOM(main);
                 return renderCurrentPage();
             case "edit-task-dialog-cancel-button":
@@ -464,6 +465,7 @@ newTaskDialogForm.addEventListener("submit", () => {
     checkTaskProjectType(data);
     const task = createTask(data);
     addTask(task);
+    updateTaskListStorage();
     newTaskDialogForm.reset();
     clearDOM(main);
     renderCurrentPage();
@@ -473,6 +475,7 @@ newProjectDialogForm.addEventListener("submit", () => {
     const data = Object.fromEntries(new FormData(newProjectDialogForm));
     const project = createProject(data);
     addProject(project);
+    updateProjectListStorage();
     newProjectDialogForm.reset();
     clearDOM(main);
     renderCurrentPage();
@@ -485,7 +488,8 @@ editTaskDialogForm.addEventListener("submit", () => {
     const data = Object.fromEntries(new FormData(editTaskDialogForm));
     checkTaskProjectType(data);
     const task = createTask(data);
-    editTask(currentIndex, task);
+    editTask(parseInt(localStorage.currentIndex), task);
+    updateTaskListStorage();
     editTaskDialogForm.reset();
     clearDOM(main);
     renderCurrentPage();
@@ -494,7 +498,8 @@ editTaskDialogForm.addEventListener("submit", () => {
 editProjectDialogForm.addEventListener("submit", () => {
     const data = Object.fromEntries(new FormData(editProjectDialogForm));
     const project = createProject(data);
-    editProject(currentIndex, project);
+    editProject(parseInt(localStorage.currentIndex), project);
+    updateProjectListStorage();
     newProjectDialogForm.reset();
     clearDOM(main);
     renderCurrentPage();
@@ -504,21 +509,26 @@ editTaskDialog.addEventListener("cancel", () => editTaskDialogForm.reset());
 editProjectDialog.addEventListener("cancel", () => editProjectDialogForm.reset());
 
 deleteTaskDialogForm.addEventListener("submit", () => {
-    deleteTask(currentIndex);
+    deleteTask(parseInt(localStorage.currentIndex));
+    updateTaskListStorage();
     clearDOM(main);
     renderCurrentPage();
 });
 
 deleteProjectDialogForm.addEventListener("submit", () => {
-    updateCurrentPage("projects");
-    deleteProject(currentIndex);
+    updateCurrentPageStorage("projects");
+    deleteProject(parseInt(localStorage.currentIndex));
+    updateProjectListStorage();
+    updateTaskListStorage();
     clearDOM(main);
     renderCurrentPage();
 });
 
+updateTaskListStorage();
+updateProjectListStorage();
+updateCurrentPageStorage("tasks")
 renderCurrentPage();
 
-
-// due date limits
-// local storage
+// time isn't quite accurate? dueDate set for tomorrow says due in 5 hours when it's 2pm?
+// completed doesn't update in local storage or doesn't update at all? idk
 // clean up code/make pretty - double check SOLID and module logic
