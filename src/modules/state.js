@@ -1,5 +1,7 @@
-export let taskList = [];
-export const projectList = [];
+import { projectListDeserialized, taskListDeserialized } from "./storage.js";
+
+export let taskList = taskListDeserialized();
+export const projectList = projectListDeserialized();
 
 export const addTask = (task) => taskList.push(task);
 
@@ -17,6 +19,7 @@ export const deleteProject = (index) => {
 };
 
 export const toggleCompleted = (list, index) => {
+    console.log(list, taskList);
     list[index].completed = !list[index].completed;
 
     if (list === projectList) {

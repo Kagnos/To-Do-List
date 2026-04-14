@@ -1,7 +1,7 @@
 import { createTask } from "./tasks.js"
 import { createProject } from "./projects.js"
 import { taskList, projectList, addTask, addProject, deleteTask, deleteProject, toggleCompleted, toggleDescription, editTask, editProject } from "./state.js"
-import { updateTaskListStorage, updateProjectListStorage, updateCurrentPageStorage, updateCurrentIndexStorage } from "./storage.js";
+import { taskListDeserialized, projectListDeserialized, updateTaskListStorage, updateProjectListStorage, updateCurrentPageStorage, updateCurrentIndexStorage } from "./storage.js";
 import { formatDistanceToNow } from "date-fns";
 
 const allButtons = document.querySelectorAll("button");
@@ -36,11 +36,10 @@ function renderTasks() {
     mainTitle.id = "main-title";
     mainTitle.innerText = "Tasks";
     main.append(mainTitle);
-
-    for(let i = 0; i < taskList.length; i++) {
+    for(let i = 0; i < taskListDeserialized().length; i++) {
         const task = div.cloneNode();
         task.classList.add("main-task");
-        if (taskList[i].completed === true) task.classList.add("completed");
+        if (taskListDeserialized()[i].completed === true) task.classList.add("completed");
         main.append(task);
 
         const group1 = div.cloneNode();
@@ -48,7 +47,7 @@ function renderTasks() {
         task.append(group1);
 
         const title = p.cloneNode();
-        title.innerText = taskList[i].title;
+        title.innerText = taskListDeserialized()[i].title;
         group1.append(title);
 
         const buttonGroup = div.cloneNode();
@@ -57,7 +56,7 @@ function renderTasks() {
 
         const checkboxButton = button.cloneNode();
         checkboxButton.classList.add("main-button");
-        checkCompleted(checkboxButton, taskList, i);
+        checkCompleted(checkboxButton, taskListDeserialized(), i);
         buttonGroup.append(checkboxButton);
 
         const editButton = button.cloneNode();
@@ -73,15 +72,15 @@ function renderTasks() {
         buttonGroup.append(deleteButton);
 
         let description = p.cloneNode();
-        if (taskList[i].description.length > 100) {
+        if (taskListDeserialized()[i].description.length > 100) {
             description = button.cloneNode();
             description.classList.add("description");
-            taskList[i].shortDescription ?
-            description.innerText = `${taskList[i].description.substring(0, 100)}...` :
-            description.innerText = taskList[i].description;
-        } else if (taskList[i].description.length > 0) {
+            taskListDeserialized()[i].shortDescription ?
+            description.innerText = `${taskListDeserialized()[i].description.substring(0, 100)}...` :
+            description.innerText = taskListDeserialized()[i].description;
+        } else if (taskListDeserialized()[i].description.length > 0) {
             description.classList.add("description");
-            description.innerText = taskList[i].description;
+            description.innerText = taskListDeserialized()[i].description;
         };
         task.append(description);
 
@@ -90,20 +89,21 @@ function renderTasks() {
         task.append(group2);
 
         const project = p.cloneNode();
-        if (typeof taskList[i].project === "number") project.innerText = `Project: ${projectList[taskList[i].project].title}`;
-        else project.innerText = `Project: ${taskList[i].project}`;
+        if (typeof taskListDeserialized()[i].project === "number") project.innerText = `Project: ${projectListDeserialized()[taskListDeserialized()[i].project].title}`;
+        else project.innerText = `Project: ${taskListDeserialized()[i].project}`;
         group2.append(project);
 
         const priority = p.cloneNode();
-        priority.innerText = `Priority: ${taskList[i].priority}`;
+        priority.innerText = `Priority: ${taskListDeserialized()[i].priority}`;
         group2.append(priority);
                     
         const dueDate = p.cloneNode();
-        dueDate.innerText = `Due ${taskList[i].dueDate ? formatDistanceToNow(new Date(taskList[i].dueDate), { addSuffix: true }) : '—'}`;
+        dueDate.innerText = `Due ${taskListDeserialized()[i].dueDate ? formatDistanceToNow(new Date(taskListDeserialized()[i].dueDate), { addSuffix: true }) : '—'}`;
         group2.append(dueDate);
 
         checkboxButton.addEventListener("click", () => {
             toggleCompleted(taskList, i);
+            updateTaskListStorage();
             clearDOM(main);
             renderCurrentPage();
         });
@@ -122,6 +122,7 @@ function renderTasks() {
 
         description.addEventListener("click", () => {
             toggleDescription(taskList, i);
+            updateTaskListStorage();
             clearDOM(main);
             renderCurrentPage();
         });
@@ -137,10 +138,10 @@ function renderProjects() {
     mainTitle.innerText = "Projects";
     main.append(mainTitle);
 
-    for(let i = 0; i < projectList.length; i++) {
+    for(let i = 0; i < projectListDeserialized().length; i++) {
         const project = button.cloneNode();
         project.classList.add("main-project");
-        if (projectList[i].completed === true) project.classList.add("completed");
+        if (projectListDeserialized()[i].completed === true) project.classList.add("completed");
         main.append(project);
 
         const group1 = div.cloneNode();
@@ -148,12 +149,12 @@ function renderProjects() {
         project.append(group1);
 
         const title = p.cloneNode();
-        title.innerText = projectList[i].title;
+        title.innerText = projectListDeserialized()[i].title;
         group1.append(title);
 
         const description = p.cloneNode();
         description.classList.add("description");
-        description.innerText = projectList[i].description;
+        description.innerText = projectListDeserialized()[i].description;
         project.append(description);
 
         const group2 = div.cloneNode();
@@ -161,11 +162,11 @@ function renderProjects() {
         project.append(group2);
 
         const priority = p.cloneNode();
-        priority.innerText = `Priority: ${projectList[i].priority}`;
+        priority.innerText = `Priority: ${projectListDeserialized()[i].priority}`;
         group2.append(priority);
 
         const dueDate = p.cloneNode();
-        dueDate.innerText = `Due ${projectList[i].dueDate ? formatDistanceToNow(new Date(projectList[i].dueDate), { addSuffix: true }) : '—'}`;
+        dueDate.innerText = `Due ${projectListDeserialized()[i].dueDate ? formatDistanceToNow(new Date(projectListDeserialized()[i].dueDate), { addSuffix: true }) : '—'}`;
         group2.append(dueDate);
 
         project.addEventListener("click", () => {
@@ -182,7 +183,7 @@ function renderProject(index) {
 
     const mainTitle = p.cloneNode();
     mainTitle.id = "main-title";
-    mainTitle.innerText = projectList[index].title;
+    mainTitle.innerText = projectListDeserialized()[index].title;
     main.append(mainTitle);
 
     const group1 = div.cloneNode();
@@ -190,11 +191,11 @@ function renderProject(index) {
     main.append(group1);
 
     const priority = p.cloneNode();
-    priority.innerText = `Priority: ${projectList[index].priority}`;
+    priority.innerText = `Priority: ${projectListDeserialized()[index].priority}`;
     group1.append(priority);
 
     const dueDate = p.cloneNode();
-    dueDate.innerText = `Due ${projectList[index].dueDate ? formatDistanceToNow(new Date(projectList[index].dueDate), { addSuffix: true }) : '—'}`;
+    dueDate.innerText = `Due ${projectListDeserialized()[index].dueDate ? formatDistanceToNow(new Date(projectListDeserialized()[index].dueDate), { addSuffix: true }) : '—'}`;
     group1.append(dueDate);
     
     const buttonGroup = div.cloneNode();
@@ -203,7 +204,7 @@ function renderProject(index) {
 
     const checkboxButton = button.cloneNode();
     checkboxButton.classList.add("main-button");
-    checkCompleted(checkboxButton, projectList, index);
+    checkCompleted(checkboxButton, projectListDeserialized(), index);
     buttonGroup.append(checkboxButton);
 
     const editButton = button.cloneNode();
@@ -219,29 +220,29 @@ function renderProject(index) {
     buttonGroup.append(deleteButton);
 
     let description = p.cloneNode();
-    if (projectList[index].description.length > 100) {
+    if (projectListDeserialized()[index].description.length > 100) {
         description = button.cloneNode();
         description.classList.add("description");
-        projectList[index].shortDescription ?
-        description.innerText = `${projectList[index].description.substring(0, 100)}...` :
-        description.innerText = projectList[index].description;
-    } else if (projectList[index].description.length > 0) {
+        projectListDeserialized()[index].shortDescription ?
+        description.innerText = `${projectListDeserialized()[index].description.substring(0, 100)}...` :
+        description.innerText = projectListDeserialized()[index].description;
+    } else if (projectListDeserialized()[index].description.length > 0) {
         description.classList.add("description");
-        description.innerText = projectList[index].description;
+        description.innerText = projectListDeserialized()[index].description;
     };
     main.append(description);
 
-    if (projectList[index].completed === true) {
+    if (projectListDeserialized()[index].completed === true) {
         mainTitle.classList.add("completed");
         group1.classList.add("completed");
         description.classList.add("completed");
     };
 
-    for(let i = 0; i < taskList.length; i++) {
-        if (parseInt(localStorage.currentPage) === taskList[i].project) {
+    for(let i = 0; i < taskListDeserialized().length; i++) {
+        if (parseInt(localStorage.currentPage) === taskListDeserialized()[i].project) {
             const task = div.cloneNode();
             task.classList.add("main-task");
-            if (taskList[i].completed === true) task.classList.add("completed");
+            if (taskListDeserialized()[i].completed === true) task.classList.add("completed");
             main.append(task);
 
             const group1 = div.cloneNode();
@@ -249,7 +250,7 @@ function renderProject(index) {
             task.append(group1);
 
             const title = p.cloneNode();
-            title.innerText = taskList[i].title;
+            title.innerText = taskListDeserialized()[i].title;
             group1.append(title);
 
             const buttonGroup = div.cloneNode();
@@ -258,7 +259,7 @@ function renderProject(index) {
 
             const checkboxButton = button.cloneNode();
             checkboxButton.classList.add("main-button");
-            checkCompleted(checkboxButton, taskList, i);
+            checkCompleted(checkboxButton, taskListDeserialized(), i);
             buttonGroup.append(checkboxButton);
 
             const editButton = button.cloneNode();
@@ -274,15 +275,15 @@ function renderProject(index) {
             buttonGroup.append(deleteButton);
 
             let description = p.cloneNode();
-            if (taskList[i].description.length > 100) {
+            if (taskListDeserialized()[i].description.length > 100) {
                 description = button.cloneNode();
                 description.classList.add("description");
-                taskList[i].shortDescription ?
-                description.innerText = `${taskList[i].description.substring(0, 100)}...` :
-                description.innerText = taskList[i].description;
-            } else if (taskList[i].description.length > 0) {
+                taskListDeserialized()[i].shortDescription ?
+                description.innerText = `${taskListDeserialized()[i].description.substring(0, 100)}...` :
+                description.innerText = taskListDeserialized()[i].description;
+            } else if (taskListDeserialized()[i].description.length > 0) {
                 description.classList.add("description");
-                description.innerText = taskList[i].description;
+                description.innerText = taskListDeserialized()[i].description;
             };
             task.append(description);
 
@@ -291,20 +292,21 @@ function renderProject(index) {
             task.append(group2);
 
             const project = p.cloneNode();
-            if (taskList.project === "None") project.innerText = `Project: ${taskList[i].project}`;
-            else project.innerText = `Project: ${projectList[taskList[i].project].title}`;
+            if (taskListDeserialized().project === "None") project.innerText = `Project: ${taskListDeserialized()[i].project}`;
+            else project.innerText = `Project: ${projectListDeserialized()[taskListDeserialized()[i].project].title}`;
             group2.append(project);
 
             const priority = p.cloneNode();
-            priority.innerText = `Priority: ${taskList[i].priority}`;
+            priority.innerText = `Priority: ${taskListDeserialized()[i].priority}`;
             group2.append(priority);
                     
             const dueDate = p.cloneNode();
-            dueDate.innerText = `Due ${taskList[i].dueDate ? formatDistanceToNow(new Date(taskList[i].dueDate), { addSuffix: true }) : '—'}`;
+            dueDate.innerText = `Due ${taskListDeserialized()[i].dueDate ? formatDistanceToNow(new Date(taskListDeserialized()[i].dueDate), { addSuffix: true }) : '—'}`;
             group2.append(dueDate);
 
             checkboxButton.addEventListener("click", () => {
                 toggleCompleted(taskList, i);
+                updateTaskListStorage();
                 clearDOM(main);
                 renderCurrentPage();
             });
@@ -323,6 +325,7 @@ function renderProject(index) {
             
             description.addEventListener("click", () => {
                 toggleDescription(taskList, i);
+                updateTaskListStorage();
                 clearDOM(main);
                 renderCurrentPage();
             });
@@ -331,6 +334,7 @@ function renderProject(index) {
 
     checkboxButton.addEventListener("click", () => {
         toggleCompleted(projectList, index);
+        updateProjectListStorage();
         clearDOM(main);
         renderCurrentPage();
     });
@@ -348,6 +352,7 @@ function renderProject(index) {
 
     description.addEventListener("click", () => {
         toggleDescription(projectList, index);
+        updateProjectListStorage();
         clearDOM(main);
         renderCurrentPage();
     });
@@ -368,13 +373,13 @@ function renderTaskProjectOptions(taskProjectSelect, index) {
     noneOption.innerText = "None";
     taskProjectSelect.append(noneOption);
 
-    for(let i = 0; i < projectList.length; i++) {
+    for(let i = 0; i < projectListDeserialized().length; i++) {
         const projectOption = option.cloneNode();
         projectOption.setAttribute("value", i);
-        if (taskProjectSelect === editTaskProjectSelect && taskList[index].project === i) {
+        if (taskProjectSelect === editTaskProjectSelect && taskListDeserialized()[index].project === i) {
             projectOption.setAttribute("selected", "");
         };
-        projectOption.innerText = projectList[i].title;
+        projectOption.innerText = projectListDeserialized()[i].title;
         taskProjectSelect.append(projectOption);
     };
 };
@@ -524,8 +529,6 @@ deleteProjectDialogForm.addEventListener("submit", () => {
     renderCurrentPage();
 });
 
-updateTaskListStorage();
-updateProjectListStorage();
 updateCurrentPageStorage("tasks")
 renderCurrentPage();
 
