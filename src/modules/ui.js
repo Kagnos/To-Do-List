@@ -96,9 +96,9 @@ function renderTasks() {
         const priority = p.cloneNode();
         priority.innerText = `Priority: ${taskListDeserialized()[i].priority}`;
         group2.append(priority);
-                    
+
         const dueDate = p.cloneNode();
-        dueDate.innerText = `Due ${taskListDeserialized()[i].dueDate ? formatDistanceToNow(new Date(taskListDeserialized()[i].dueDate), { addSuffix: true }) : '—'}`;
+        dueDate.innerText = formatDate(taskListDeserialized()[i].dueDate);
         group2.append(dueDate);
 
         checkboxButton.addEventListener("click", () => {
@@ -166,7 +166,7 @@ function renderProjects() {
         group2.append(priority);
 
         const dueDate = p.cloneNode();
-        dueDate.innerText = `Due ${projectListDeserialized()[i].dueDate ? formatDistanceToNow(new Date(projectListDeserialized()[i].dueDate), { addSuffix: true }) : '—'}`;
+        dueDate.innerText = formatDate(projectListDeserialized()[i].dueDate);
         group2.append(dueDate);
 
         project.addEventListener("click", () => {
@@ -195,7 +195,7 @@ function renderProject(index) {
     group1.append(priority);
 
     const dueDate = p.cloneNode();
-    dueDate.innerText = `Due ${projectListDeserialized()[index].dueDate ? formatDistanceToNow(new Date(projectListDeserialized()[index].dueDate), { addSuffix: true }) : '—'}`;
+    dueDate.innerText = formatDate(projectListDeserialized()[index].dueDate);
     group1.append(dueDate);
     
     const buttonGroup = div.cloneNode();
@@ -301,7 +301,7 @@ function renderProject(index) {
             group2.append(priority);
                     
             const dueDate = p.cloneNode();
-            dueDate.innerText = `Due ${taskListDeserialized()[i].dueDate ? formatDistanceToNow(new Date(taskListDeserialized()[i].dueDate), { addSuffix: true }) : '—'}`;
+            dueDate.innerText = formatDate(taskListDeserialized()[i].dueDate);
             group2.append(dueDate);
 
             checkboxButton.addEventListener("click", () => {
@@ -428,6 +428,10 @@ const checkTaskProjectType = (data) => {
     if (!(isNaN(parseInt(data.task_project)))) return data.task_project = parseInt(data.task_project);
 };
 
+const formatDate = (date) => {
+    return `Due ${formatDistanceToNow(new Date(date.replace(/-/g, '\/')), { addSuffix: true })}`;
+};
+
 allButtons.forEach(button => {
     button.addEventListener("click", () => {
         switch(button.id) {
@@ -533,5 +537,4 @@ updateCurrentPageStorage("tasks")
 renderCurrentPage();
 
 // time isn't quite accurate? dueDate set for tomorrow says due in 5 hours when it's 2pm?
-// completed doesn't update in local storage or doesn't update at all? idk
 // clean up code/make pretty - double check SOLID and module logic
