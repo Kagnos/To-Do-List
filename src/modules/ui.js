@@ -361,10 +361,104 @@ function renderProject(index) {
     });
 };
 
+function renderWelcome() {
+    main.classList.remove("grid-view");
+    main.classList.add("list-view");
+
+    const mainTitle = p.cloneNode();
+    mainTitle.id = "main-title";
+    mainTitle.innerText = "Welcome!";
+    main.append(mainTitle);
+
+    const welcomeMessage1 = p.cloneNode();
+    welcomeMessage1.innerText = "Try creating your first To Do by clicking on the New Task or New Project button.";
+    main.append(welcomeMessage1);
+
+    const welcomeMessage2 = p.cloneNode();
+    welcomeMessage2.innerText = "Click on the Tasks or Projects buttons to view your To Dos. Click on the Tips button for help.";
+    main.append(welcomeMessage2);
+};
+
+function renderTips() {
+    main.classList.remove("grid-view");
+    main.classList.add("list-view");
+
+    const mainTitle = p.cloneNode();
+    mainTitle.id = "main-title";
+    mainTitle.innerText = "Tips";
+    main.append(mainTitle);
+
+    const newTip = p.cloneNode();
+    newTip.innerText = "Click the New Task or New Project button to create a new To Do.";
+    main.append(newTip);
+
+    const viewTip = p.cloneNode();
+    viewTip.innerText = "Click on the Tasks or Projects buttons to view your To Dos.";
+    main.append(viewTip);
+
+    const projectsTip = p.cloneNode();
+    projectsTip.innerText = " Projects are similar to tasks, but act more as folders that can hold a group of tasks.";
+    main.append(projectsTip);
+
+    const checkboxGroup = div.cloneNode();
+    checkboxGroup.classList.add("tip-item-group");
+    main.append(checkboxGroup);
+    const checkboxButton = button.cloneNode();
+    checkboxButton.classList.add("main-button");
+    checkboxButton.setAttribute("aria-label", "Example Checkbox");
+    checkboxButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <g id='Interface / Checkbox_Unchecked'> <path id='Vector' d='M4 7.2002V16.8002C4 17.9203 4 18.4801 4.21799 18.9079C4.40973 19.2842 4.71547 19.5905 5.0918 19.7822C5.5192 20 6.07899 20 7.19691 20H16.8031C17.921 20 18.48 20 18.9074 19.7822C19.2837 19.5905 19.5905 19.2842 19.7822 18.9079C20 18.4805 20 17.9215 20 16.8036V7.19691C20 6.07899 20 5.5192 19.7822 5.0918C19.5905 4.71547 19.2837 4.40973 18.9074 4.21799C18.4796 4 17.9203 4 16.8002 4H7.2002C6.08009 4 5.51962 4 5.0918 4.21799C4.71547 4.40973 4.40973 4.71547 4.21799 5.0918C4 5.51962 4 6.08009 4 7.2002Z' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g> </g></svg>";
+    checkboxGroup.append(checkboxButton);
+    const checkboxTip = p.cloneNode();
+    checkboxTip.innerText = "This is a checkbox, you can use it to check off any task or project.";
+    checkboxGroup.append(checkboxTip);
+
+    const editGroup = div.cloneNode();
+    editGroup.classList.add("tip-item-group");
+    main.append(editGroup);
+    const editButton = button.cloneNode();
+    editButton.classList.add("main-button");
+    editButton.setAttribute("aria-label", "Edit Button Example");
+    editButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill='#c2c0b6' stroke='#c2c0b6'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title></title> <g id='Complete'> <g id='edit'> <g> <path d='M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8' fill='none' stroke='#c2c0b6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'></path> <polygon fill='none' points='12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8' stroke='#c2c0b6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'></polygon> </g> </g> </g> </g></svg>";
+    editGroup.append(editButton);
+    const editTip = p.cloneNode();
+    editTip.innerText = "This is an edit button, you can use it to make any changes to the respective task or project.";
+    editGroup.append(editTip);
+
+    const deleteGroup = div.cloneNode();
+    deleteGroup.classList.add("tip-item-group");
+    main.append(deleteGroup);
+    const deleteButton = button.cloneNode();
+    deleteButton.classList.add("main-button");
+    deleteButton.setAttribute("aria-label", "Delete Button Example");
+    deleteButton.innerHTML = "<svg class='main-svg' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path d='M4 7H20' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M6 10L7.70141 19.3578C7.87432 20.3088 8.70258 21 9.66915 21H14.3308C15.2974 21 16.1257 20.3087 16.2986 19.3578L18 10' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z' stroke='#c2c0b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g></svg>";
+    deleteGroup.append(deleteButton);
+    const deleteTip = p.cloneNode();
+    deleteTip.innerText = "This is a delete button, you can use it to remove any project or task. Don't worry, it will always ask for confirmation before deleting.";
+    deleteGroup.append(deleteTip);
+
+    const descriptionTip = p.cloneNode();
+    descriptionTip.innerText = "Descriptions are cut off after 100 characters, but can be viewed in their entirety if clicked on.";
+    main.append(descriptionTip);
+
+    const dueDateTip = p.cloneNode();
+    dueDateTip.innerText = "Due dates are always set for the start of the day, not the end.";
+    main.append(dueDateTip);
+};
+
 function renderCurrentPage() {
-    if (localStorage.currentPage === "tasks") renderTasks();
-    else if (localStorage.currentPage === "projects") renderProjects();
-    else renderProject(localStorage.currentPage);
+    if (localStorage.currentPage === undefined) localStorage.setItem("currentPage", "welcome");
+
+    switch (localStorage.currentPage) {
+        case "welcome": 
+            return renderWelcome();
+        case "tasks":
+            return renderTasks();
+        case "projects":
+            return renderProjects();
+        case "tips":
+            return renderTips();
+    };
+    renderProject(localStorage.currentPage);
 };
 
 function renderTaskProjectOptions(taskProjectSelect, index) {
@@ -458,6 +552,10 @@ allButtons.forEach(button => {
                 updateCurrentPageStorage("projects");
                 clearDOM(main);
                 return renderCurrentPage();
+            case "view-tips-sidebar-button":
+                updateCurrentPageStorage("tips");
+                clearDOM(main);
+                return renderCurrentPage();
             case "edit-task-dialog-cancel-button":
                 editTaskDialogForm.reset();
                 return editTaskDialog.close();
@@ -536,7 +634,8 @@ deleteProjectDialogForm.addEventListener("submit", () => {
     renderCurrentPage();
 });
 
-updateCurrentPageStorage("tasks")
 renderCurrentPage();
 
 // clean up code/make pretty - double check SOLID and module logic
+
+// semi colons, remove main-button class, shorten description on projects page, consolidate styles 
