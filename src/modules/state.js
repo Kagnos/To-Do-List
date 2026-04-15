@@ -19,7 +19,6 @@ export const deleteProject = (index) => {
 };
 
 export const toggleCompleted = (list, index) => {
-    console.log(list, taskList);
     list[index].completed = !list[index].completed;
 
     if (list === projectList) {

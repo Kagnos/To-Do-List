@@ -104,6 +104,7 @@ function renderTasks() {
         checkboxButton.addEventListener("click", () => {
             toggleCompleted(taskList, i);
             updateTaskListStorage();
+            updateProjectListStorage();
             clearDOM(main);
             renderCurrentPage();
         });
@@ -307,6 +308,7 @@ function renderProject(index) {
             checkboxButton.addEventListener("click", () => {
                 toggleCompleted(taskList, i);
                 updateTaskListStorage();
+                updateProjectListStorage();
                 clearDOM(main);
                 renderCurrentPage();
             });
@@ -334,6 +336,7 @@ function renderProject(index) {
 
     checkboxButton.addEventListener("click", () => {
         toggleCompleted(projectList, index);
+        updateTaskListStorage();
         updateProjectListStorage();
         clearDOM(main);
         renderCurrentPage();
@@ -536,5 +539,4 @@ deleteProjectDialogForm.addEventListener("submit", () => {
 updateCurrentPageStorage("tasks")
 renderCurrentPage();
 
-// time isn't quite accurate? dueDate set for tomorrow says due in 5 hours when it's 2pm?
 // clean up code/make pretty - double check SOLID and module logic
