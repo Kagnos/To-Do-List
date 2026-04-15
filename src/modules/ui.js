@@ -146,7 +146,7 @@ function renderProjects() {
         main.append(project);
 
         const group1 = div.cloneNode();
-        group1.classList.add("main-item-group");
+        group1.classList.add("project-item-group");
         project.append(group1);
 
         const title = p.cloneNode();
@@ -155,8 +155,12 @@ function renderProjects() {
 
         const description = p.cloneNode();
         description.classList.add("description");
-        description.innerText = projectListDeserialized()[i].description;
-        project.append(description);
+        if (projectListDeserialized()[i].description.length > 100) {
+            description.innerText = `${projectListDeserialized()[i].description.substring(0, 100)}...`;
+        } else if (projectListDeserialized()[i].description.length > 0) {
+            description.innerText = projectListDeserialized()[i].description;
+        };
+        group1.append(description);
 
         const group2 = div.cloneNode();
         group2.classList.add("main-item-group");
@@ -638,4 +642,5 @@ renderCurrentPage();
 
 // clean up code/make pretty - double check SOLID and module logic
 
-// semi colons, remove main-button class, shorten description on projects page, consolidate styles 
+// semi colons, remove main-button class, consolidate styles, 
+// standardize aria-label capitalization
