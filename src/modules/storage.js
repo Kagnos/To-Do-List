@@ -4,6 +4,7 @@ export let taskListDeserialized = () => {
     if (localStorage.taskList === undefined) localStorage.setItem("taskList", "[]");
     return JSON.parse(localStorage.taskList);
 };
+
 export let projectListDeserialized = () => {
     if (localStorage.projectList === undefined) localStorage.setItem("projectList", "[]");
     return JSON.parse(localStorage.projectList);

@@ -25,12 +25,9 @@ export const toggleCompleted = (list, index) => {
         for(let i = 0; i < taskList.length; i++) {
             if (parseInt(localStorage.currentPage) === taskList[i].project) taskList[i].completed = list[index].completed;
         };
-    };
-    if (list === taskList && typeof list[index].project === "number" && list[index].completed === false) {
+    } else if (list === taskList && typeof list[index].project === "number" && list[index].completed === false) {
         projectList[list[index].project].completed = false;
     };
 };
 
-export const toggleDescription = (list, index) => {
-    list[index].shortDescription = !list[index].shortDescription;
-};
+export const toggleDescription = (list, index) => list[index].shortDescription = !list[index].shortDescription;

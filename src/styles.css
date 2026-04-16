@@ -163,20 +163,9 @@ button:hover {
     grid-row: 1 / 2;
 }
 
-.main-task {
+.main-item {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    border: 2px solid var(--border-color);
-    border-radius: 5px;
-    padding: 10px;
-    word-break: break-word;
-}
-
-.main-project {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     gap: 5px;
     border: 2px solid var(--border-color);
     border-radius: 5px;
@@ -220,7 +209,7 @@ button:hover {
     text-decoration: line-through;
 }
 
-/* Dialog */
+/* Dialogs */
 
 dialog {
     margin: auto;

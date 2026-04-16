@@ -4,7 +4,3 @@ import "./modules/tasks.js";
 import "./modules/projects.js";
 import "./modules/storage.js";
 import "./modules/ui.js";
-
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Page loaded and all script imported!");
-});
