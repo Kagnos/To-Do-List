@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="icon" type="image/png" href="af982e732a2bfb803ff2.png">
+<script defer src="main.js"></script></head>
+
+<body id="layout">
+
+<aside id="sidebar">
+
+    <div id="sidebar-group-1">
+        <p id="sidebar-title">To Do List</p>
+    </div>
+
+    <div id="sidebar-group-2" class="sidebar-group">
+        <button id="new-task-sidebar-button" class="sidebar-button" aria-label="New task"><svg class="sidebar-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12H20M12 4V20" stroke="#faf9f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>New Task</button>
+        <button id="new-project-sidebar-button" class="sidebar-button" aria-label="New project"><svg class="sidebar-svg" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"> <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-464.000000, -1087.000000)" fill="#faf9f5"> <path d="M480,1117 C472.268,1117 466,1110.73 466,1103 C466,1095.27 472.268,1089 480,1089 C487.732,1089 494,1095.27 494,1103 C494,1110.73 487.732,1117 480,1117 L480,1117 Z M480,1087 C471.163,1087 464,1094.16 464,1103 C464,1111.84 471.163,1119 480,1119 C488.837,1119 496,1111.84 496,1103 C496,1094.16 488.837,1087 480,1087 L480,1087 Z M486,1102 L481,1102 L481,1097 C481,1096.45 480.553,1096 480,1096 C479.447,1096 479,1096.45 479,1097 L479,1102 L474,1102 C473.447,1102 473,1102.45 473,1103 C473,1103.55 473.447,1104 474,1104 L479,1104 L479,1109 C479,1109.55 479.447,1110 480,1110 C480.553,1110 481,1109.55 481,1109 L481,1104 L486,1104 C486.553,1104 487,1103.55 487,1103 C487,1102.45 486.553,1102 486,1102 L486,1102 Z" id="plus-circle" sketch:type="MSShapeGroup"> </path> </g> </g> </g></svg>New Project</button>
+    </div>
+
+    <div id="sidebar-group-3" class="sidebar-group">
+        <button id="view-tasks-sidebar-button" class="sidebar-button" aria-label="View tasks"><svg class="sidebar-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M8.707 6.707a1 1 0 0 0-1.414-1.414L4 8.586 2.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4ZM12 7a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H12ZM8.707 13.293a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414L4 16.586l3.293-3.293a1 1 0 0 1 1.414 0ZM12 15a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H12Z" fill="#faf9f5"></path></g></svg>Tasks</button>
+        <button id="view-projects-sidebar-button" class="sidebar-button" aria-label="View projects"><svg class="sidebar-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#faf9f5"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:none;stroke:#faf9f5;stroke-linecap:square;stroke-miterlimit:10;stroke-width:1.91px;}</style> </defs> <g id="archieve"> <rect class="cls-1" x="1.5" y="1.98" width="21" height="6.68"></rect> <rect class="cls-1" x="1.5" y="8.66" width="21" height="6.68"></rect> <rect class="cls-1" x="1.5" y="15.34" width="21" height="6.68"></rect> <line class="cls-1" x1="10.09" y1="3.89" x2="13.91" y2="3.89"></line> <line class="cls-1" x1="10.09" y1="10.57" x2="13.91" y2="10.57"></line> <line class="cls-1" x1="10.09" y1="17.25" x2="13.91" y2="17.25"></line> </g> </g></svg>Projects</button>
+        <button id="view-tips-sidebar-button" class="sidebar-button" aria-label="View tips"><svg class="sidebar-svg" fill="#faf9f5" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" stroke="#faf9f5"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>lightbulb-on</title> <path d="M20 25.25h-8c-0.414 0-0.75 0.336-0.75 0.75v0 2c0 0 0 0 0 0 0 0.207 0.084 0.395 0.22 0.531v0l2 2c0.135 0.135 0.322 0.219 0.529 0.219 0.001 0 0.001 0 0.002 0h4c0 0 0.001 0 0.002 0 0.207 0 0.394-0.084 0.53-0.219l2-2c0.135-0.136 0.219-0.323 0.219-0.53 0-0.001 0-0.001 0-0.002v0-2c-0-0.414-0.336-0.75-0.75-0.75v0zM19.25 27.689l-1.561 1.561h-3.379l-1.561-1.561v-0.939h6.5zM24.951 6.622c-1.828-3.111-5.083-5.213-8.842-5.408l-0.027-0.001h-0.067c-3.759 0.165-7.009 2.202-8.857 5.197l-0.027 0.047c-1.12 1.611-1.789 3.609-1.789 5.763 0 0.006 0 0.011 0 0.017v-0.001c0.175 2.207 0.89 4.217 2.012 5.937l-0.030-0.049c0.319 0.549 0.657 1.090 0.996 1.631 0.686 1.012 1.341 2.175 1.9 3.392l0.063 0.153c0.117 0.273 0.383 0.461 0.692 0.461h0c0.001 0 0.003 0 0.004 0 0.103 0 0.201-0.022 0.29-0.060l-0.005 0.002c0.273-0.116 0.461-0.382 0.461-0.692 0-0.104-0.021-0.203-0.060-0.294l0.002 0.005c-0.658-1.454-1.35-2.688-2.135-3.855l0.059 0.093c-0.33-0.527-0.659-1.054-0.971-1.59-0.982-1.464-1.624-3.232-1.777-5.138l-0.002-0.038c0.015-1.841 0.591-3.544 1.566-4.95l-0.019 0.029c1.603-2.629 4.391-4.397 7.603-4.56l0.023-0.001h0.056c3.255 0.191 6.045 2.013 7.582 4.655l0.024 0.045c0.911 1.371 1.453 3.055 1.453 4.865 0 0.060-0.001 0.12-0.002 0.18l0-0.009c-0.223 1.924-0.883 3.659-1.878 5.152l0.027-0.043c-0.289 0.49-0.592 0.975-0.895 1.457-0.704 1.048-1.391 2.257-1.986 3.518l-0.073 0.171c-0.039 0.087-0.061 0.19-0.061 0.297 0 0.414 0.336 0.75 0.75 0.75 0.305 0 0.568-0.182 0.685-0.444l0.002-0.005c0.633-1.354 1.285-2.498 2.015-3.585l-0.060 0.095c0.309-0.494 0.619-0.99 0.916-1.492 1.090-1.643 1.825-3.612 2.050-5.733l0.005-0.057c0.003-0.090 0.005-0.196 0.005-0.303 0-2.087-0.627-4.027-1.702-5.643l0.023 0.037zM14.684 5.893c-0.122-0.262-0.383-0.44-0.685-0.44-0.111 0-0.217 0.024-0.312 0.067l0.005-0.002c-2.316 1.342-3.961 3.621-4.424 6.306l-0.008 0.054c-0.006 0.037-0.010 0.079-0.010 0.122 0 0.371 0.269 0.678 0.622 0.74l0.004 0.001c0.037 0.006 0.079 0.010 0.123 0.010 0.001 0 0.002 0 0.002 0h-0c0.37-0 0.677-0.268 0.738-0.621l0.001-0.004c0.397-2.232 1.714-4.097 3.536-5.22l0.033-0.019c0.262-0.12 0.442-0.381 0.442-0.683 0-0.112-0.025-0.218-0.068-0.313l0.002 0.005zM1.665 2.671l4 2c0.098 0.050 0.213 0.079 0.335 0.079 0.414 0 0.75-0.336 0.75-0.75 0-0.292-0.167-0.545-0.411-0.669l-0.004-0.002-4-2c-0.098-0.050-0.213-0.079-0.335-0.079-0.414 0-0.75 0.336-0.75 0.75 0 0.292 0.167 0.545 0.411 0.669l0.004 0.002zM26 4.75c0 0 0 0 0.001 0 0.122 0 0.238-0.029 0.34-0.081l-0.004 0.002 4-2c0.248-0.126 0.414-0.379 0.414-0.671 0-0.414-0.336-0.75-0.75-0.75-0.122 0-0.238 0.029-0.34 0.081l0.004-0.002-4 2c-0.247 0.126-0.413 0.379-0.413 0.67 0 0.414 0.335 0.75 0.749 0.75h0zM30.336 21.33l-4-2c-0.097-0.049-0.212-0.078-0.333-0.078-0.414 0-0.749 0.336-0.749 0.749 0 0.29 0.165 0.542 0.406 0.666l0.004 0.002 4 2c0.097 0.050 0.212 0.080 0.334 0.080 0.001 0 0.001 0 0.002 0h-0c0.414-0 0.75-0.336 0.75-0.75 0-0.291-0.166-0.544-0.409-0.668l-0.004-0.002zM5.772 19.32l-3.913 1.83c-0.258 0.122-0.433 0.381-0.433 0.68 0 0.414 0.336 0.75 0.75 0.75 0 0 0 0 0 0h-0c0.115-0 0.224-0.026 0.322-0.072l-0.005 0.002 3.913-1.83c0.26-0.122 0.436-0.381 0.436-0.681 0-0.414-0.336-0.75-0.75-0.75-0.117 0-0.227 0.027-0.325 0.074l0.005-0.002zM2 12.75h1c0.414 0 0.75-0.336 0.75-0.75s-0.336-0.75-0.75-0.75v0h-1c-0.414 0-0.75 0.336-0.75 0.75s0.336 0.75 0.75 0.75v0zM30 11.25h-1c-0.414 0-0.75 0.336-0.75 0.75s0.336 0.75 0.75 0.75v0h1c0.414 0 0.75-0.336 0.75-0.75s-0.336-0.75-0.75-0.75v0z"></path> </g></svg>Tips</button>
+    </div>
+
+</aside>
+
+<main id="main">
+</main>
+
+    <dialog id="new-task-dialog">
+        <form id="new-task-dialog-form" method="dialog">
+
+            <div class="form-title-group">
+                <p class="form-title">New Task</p>
+                <button id="new-task-dialog-cancel-button" class="dialog-cancel-button" type="button" aria-label="Close new task form"><svg class="dialog-cancel-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="#c2c0b6"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Close new task form</title> <path d="M20.7457 3.32851C20.3552 2.93798 19.722 2.93798 19.3315 3.32851L12.0371 10.6229L4.74275 3.32851C4.35223 2.93798 3.71906 2.93798 3.32854 3.32851C2.93801 3.71903 2.93801 4.3522 3.32854 4.74272L10.6229 12.0371L3.32856 19.3314C2.93803 19.722 2.93803 20.3551 3.32856 20.7457C3.71908 21.1362 4.35225 21.1362 4.74277 20.7457L12.0371 13.4513L19.3315 20.7457C19.722 21.1362 20.3552 21.1362 20.7457 20.7457C21.1362 20.3551 21.1362 19.722 20.7457 19.3315L13.4513 12.0371L20.7457 4.74272C21.1362 4.3522 21.1362 3.71903 20.7457 3.32851Z" fill="#c2c0b6"></path> </g></svg></button>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="new-task-title">Title</label>
+                <input id="new-task-title" name="task_title" type="text" maxlength="40" required>
+            </div>
+
+            <div class="form-group">
+                <label for="new-task-description">Description</label>
+                <textarea id="new-task-description" name="task_description" maxlength="500"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="new-task-due-date">Due Date</label>
+                <input id="new-task-due-date" name="task_due_date" type="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="new-task-priority">Priority</label>
+                <select id="new-task-priority" name="task_priority" required>
+                    <option value="" selected disabled>Select</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="new-task-project">Project</label>
+                <select id="new-task-project" name="task_project"></select>
+            </div>
+
+            <button id="new-task-dialog-submit-button" class="dialog-submit-button" type="submit">Add Task</button>
+
+        </form>
+    </dialog>
+
+    <dialog id="new-project-dialog">
+        <form id="new-project-dialog-form" method="dialog">
+
+            <div class="form-title-group">
+                <p class="form-title">New Project</p>
+                <button id="new-project-dialog-cancel-button" class="dialog-cancel-button" type="button" aria-label="Close new project form"><svg class="dialog-cancel-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="#c2c0b6"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Close new project form</title> <path d="M20.7457 3.32851C20.3552 2.93798 19.722 2.93798 19.3315 3.32851L12.0371 10.6229L4.74275 3.32851C4.35223 2.93798 3.71906 2.93798 3.32854 3.32851C2.93801 3.71903 2.93801 4.3522 3.32854 4.74272L10.6229 12.0371L3.32856 19.3314C2.93803 19.722 2.93803 20.3551 3.32856 20.7457C3.71908 21.1362 4.35225 21.1362 4.74277 20.7457L12.0371 13.4513L19.3315 20.7457C19.722 21.1362 20.3552 21.1362 20.7457 20.7457C21.1362 20.3551 21.1362 19.722 20.7457 19.3315L13.4513 12.0371L20.7457 4.74272C21.1362 4.3522 21.1362 3.71903 20.7457 3.32851Z" fill="#c2c0b6"></path> </g></svg></button>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="new-project-title">Title</label>
+                <input id="new-project-title" name="project_title" type="text" maxlength="40" required>
+            </div>
+
+            <div class="form-group">
+                <label for="new-project-description">Description</label>
+                <textarea id="new-project-description" name="project_description" maxlength="500"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="new-project-due-date">Due Date</label>
+                <input id="new-project-due-date" name="project_due_date" type="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="new-project-priority">Priority</label>
+                <select id="new-project-priority" name="project_priority" required>
+                    <option value="" selected disabled>Select</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+
+            <button id="new-project-dialog-submit-button" class="dialog-submit-button" type="submit">Add Project</button>
+
+        </form>
+    </dialog>
+
+    <dialog id="edit-task-dialog">
+        <form id="edit-task-dialog-form" method="dialog">
+
+            <div class="form-title-group">
+                <p class="form-title">Edit Task</p>
+                <button id="edit-task-dialog-cancel-button" class="dialog-cancel-button" type="button" aria-label="Close edit task form"><svg class="dialog-cancel-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="#c2c0b6"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Close edit task form</title> <path d="M20.7457 3.32851C20.3552 2.93798 19.722 2.93798 19.3315 3.32851L12.0371 10.6229L4.74275 3.32851C4.35223 2.93798 3.71906 2.93798 3.32854 3.32851C2.93801 3.71903 2.93801 4.3522 3.32854 4.74272L10.6229 12.0371L3.32856 19.3314C2.93803 19.722 2.93803 20.3551 3.32856 20.7457C3.71908 21.1362 4.35225 21.1362 4.74277 20.7457L12.0371 13.4513L19.3315 20.7457C19.722 21.1362 20.3552 21.1362 20.7457 20.7457C21.1362 20.3551 21.1362 19.722 20.7457 19.3315L13.4513 12.0371L20.7457 4.74272C21.1362 4.3522 21.1362 3.71903 20.7457 3.32851Z" fill="#c2c0b6"></path> </g></svg></button>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="edit-task-title">Title</label>
+                <input id="edit-task-title" name="task_title" type="text" maxlength="40" required>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-task-description">Description</label>
+                <textarea id="edit-task-description" name="task_description" maxlength="500"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-task-due-date">Due Date</label>
+                <input id="edit-task-due-date" name="task_due_date" type="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-task-priority">Priority</label>
+                <select id="edit-task-priority" name="task_priority" required>
+                    <option value="" selected disabled>Select</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-task-project">Project</label>
+                <select id="edit-task-project" name="task_project"></select>
+            </div>
+
+            <button id="edit-task-dialog-submit-button" class="dialog-submit-button" type="submit">Add Task</button>
+
+        </form>
+    </dialog>
+
+    <dialog id="edit-project-dialog">
+        <form id="edit-project-dialog-form" method="dialog">
+
+            <div class="form-title-group">
+                <p class="form-title">Edit Project</p>
+                <button id="edit-project-dialog-cancel-button" class="dialog-cancel-button" type="button" aria-label="Close edit project form"><svg class="dialog-cancel-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="#c2c0b6"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Close edit project form</title> <path d="M20.7457 3.32851C20.3552 2.93798 19.722 2.93798 19.3315 3.32851L12.0371 10.6229L4.74275 3.32851C4.35223 2.93798 3.71906 2.93798 3.32854 3.32851C2.93801 3.71903 2.93801 4.3522 3.32854 4.74272L10.6229 12.0371L3.32856 19.3314C2.93803 19.722 2.93803 20.3551 3.32856 20.7457C3.71908 21.1362 4.35225 21.1362 4.74277 20.7457L12.0371 13.4513L19.3315 20.7457C19.722 21.1362 20.3552 21.1362 20.7457 20.7457C21.1362 20.3551 21.1362 19.722 20.7457 19.3315L13.4513 12.0371L20.7457 4.74272C21.1362 4.3522 21.1362 3.71903 20.7457 3.32851Z" fill="#c2c0b6"></path> </g></svg></button>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="project-title">Title</label>
+                <input id="edit-project-title" name="project_title" type="text" maxlength="40" required>
+            </div>
+
+            <div class="form-group">
+                <label for="project-description">Description</label>
+                <textarea id="edit-project-description" name="project_description" maxlength="500"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-project-due-date">Due Date</label>
+                <input id="edit-project-due-date" name="project_due_date" type="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-project-priority">Priority</label>
+                <select id="edit-project-priority" name="project_priority" required>
+                    <option value="" selected disabled>Select</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+
+            <button id="edit-project-dialog-submit-button" class="dialog-submit-button" type="submit">Add Project</button>
+
+        </form>
+    </dialog>
+
+    <dialog id="delete-task-dialog">
+        <form id="delete-task-dialog-form" method="dialog">
+
+            <div class="form-title-group">
+                <p class="form-title">Are You Sure?</p>
+                <button id="delete-task-dialog-cancel-button" class="dialog-cancel-button" type="button" aria-label="Close delete task confirmation form"><svg class="dialog-cancel-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="#c2c0b6"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Close delete task confirmation form</title> <path d="M20.7457 3.32851C20.3552 2.93798 19.722 2.93798 19.3315 3.32851L12.0371 10.6229L4.74275 3.32851C4.35223 2.93798 3.71906 2.93798 3.32854 3.32851C2.93801 3.71903 2.93801 4.3522 3.32854 4.74272L10.6229 12.0371L3.32856 19.3314C2.93803 19.722 2.93803 20.3551 3.32856 20.7457C3.71908 21.1362 4.35225 21.1362 4.74277 20.7457L12.0371 13.4513L19.3315 20.7457C19.722 21.1362 20.3552 21.1362 20.7457 20.7457C21.1362 20.3551 21.1362 19.722 20.7457 19.3315L13.4513 12.0371L20.7457 4.74272C21.1362 4.3522 21.1362 3.71903 20.7457 3.32851Z" fill="#c2c0b6"></path> </g></svg></button>
+            </div>
+
+            <button id="delete-task-dialog-submit-button" class="dialog-submit-button" type="submit">Delete Task</button>
+
+        </form>
+    </dialog>
+
+    <dialog id="delete-project-dialog">
+        <form id="delete-project-dialog-form" method="dialog">
+            
+            <div class="form-title-group">
+                <p class="form-title">Are You Sure?</p>
+                <button id="delete-project-dialog-cancel-button" class="dialog-cancel-button" type="button" aria-label="Close delete project confirmation form"><svg class="dialog-cancel-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="#c2c0b6"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Close delete project confirmation form</title> <path d="M20.7457 3.32851C20.3552 2.93798 19.722 2.93798 19.3315 3.32851L12.0371 10.6229L4.74275 3.32851C4.35223 2.93798 3.71906 2.93798 3.32854 3.32851C2.93801 3.71903 2.93801 4.3522 3.32854 4.74272L10.6229 12.0371L3.32856 19.3314C2.93803 19.722 2.93803 20.3551 3.32856 20.7457C3.71908 21.1362 4.35225 21.1362 4.74277 20.7457L12.0371 13.4513L19.3315 20.7457C19.722 21.1362 20.3552 21.1362 20.7457 20.7457C21.1362 20.3551 21.1362 19.722 20.7457 19.3315L13.4513 12.0371L20.7457 4.74272C21.1362 4.3522 21.1362 3.71903 20.7457 3.32851Z" fill="#c2c0b6"></path> </g></svg></button>
+            </div>
+
+            <button id="delete-project-dialog-submit-button" class="dialog-submit-button" type="submit">Delete Project</button>
+
+        </form>
+    </dialog>
+
+</body>
+</html>
